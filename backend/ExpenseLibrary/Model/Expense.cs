@@ -21,6 +21,6 @@ namespace ExpenseLibrary.Model
         public Category ? Category { get; set; }
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
-        public User ? User { get; set; }
+        public User ? User { get; set; } 
     }
 }
