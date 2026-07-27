@@ -13,7 +13,7 @@
 - Expense CRUD
 - Category-wise Expenses
 - Repository Pattern
-- Dependency Injection
+- Dependency Injection 
 
 ## Status
 Backend Version 1 Completed
