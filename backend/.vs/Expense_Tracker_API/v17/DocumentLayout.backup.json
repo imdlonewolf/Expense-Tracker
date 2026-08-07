@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{EEEA1F9C-CAAF-4036-A9BB-F0CD2DA0A4A3}|Web_Api\\Web_Api.csproj|c:\\users\\nirjhar.a.das\\downloads\\expense_tracker\\backend\\web_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EEEA1F9C-CAAF-4036-A9BB-F0CD2DA0A4A3}|Web_Api\\Web_Api.csproj|solutionrelative:web_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEEA1F9C-CAAF-4036-A9BB-F0CD2DA0A4A3}|Web_Api\\Web_Api.csproj|c:\\users\\nirjhar.a.das\\downloads\\expense_tracker\\backend\\web_api\\controllers\\expensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEEA1F9C-CAAF-4036-A9BB-F0CD2DA0A4A3}|Web_Api\\Web_Api.csproj|solutionrelative:web_api\\controllers\\expensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C7806B9-CD01-4FB5-8328-3B2B4B39ACEC}|ExpenseLibrary\\ExpenseLibrary.csproj|c:\\users\\nirjhar.a.das\\downloads\\expense_tracker\\backend\\expenselibrary\\model\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C7806B9-CD01-4FB5-8328-3B2B4B39ACEC}|ExpenseLibrary\\ExpenseLibrary.csproj|solutionrelative:expenselibrary\\model\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExpenseController.cs",
+              "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Controllers\\ExpenseController.cs",
+              "RelativeDocumentMoniker": "Web_Api\\Controllers\\ExpenseController.cs",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Controllers\\ExpenseController.cs",
+              "RelativeToolTip": "Web_Api\\Controllers\\ExpenseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-06T08:42:52.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Expense.cs",
+              "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Model\\Expense.cs",
+              "RelativeDocumentMoniker": "ExpenseLibrary\\Model\\Expense.cs",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Model\\Expense.cs",
+              "RelativeToolTip": "ExpenseLibrary\\Model\\Expense.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-28T16:09:24.011Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +56,7 @@
               "RelativeDocumentMoniker": "Web_Api\\Program.cs",
               "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Program.cs",
               "RelativeToolTip": "Web_Api\\Program.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAcwCUAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-16T14:19:38.623Z",
               "EditorCaption": ""

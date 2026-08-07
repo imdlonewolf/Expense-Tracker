@@ -24,6 +24,7 @@ const ExpenseList = () => {
             <tr>
               <th>Amount</th>
               <th>Description</th>
+              <th>Category</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +33,7 @@ const ExpenseList = () => {
                 <tr key={x.expenseId}>
                   <td>{x.amount}</td>
                   <td>{x.description}</td>
+                  <td>{x.categoryId}</td>
                   <td>
                     <Link to={`details/${x.expenseId}`}>Details</Link>
                   </td>
