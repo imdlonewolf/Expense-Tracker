@@ -17,7 +17,7 @@ namespace Web_Api.Controllers
             _repo = repo;
             //_jwt = jwt;
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login([FromBody]User user)
         {
             User u = _repo.Login(user.Phone, user.Password);

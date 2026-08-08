@@ -16,6 +16,12 @@ const ExpenseList = () => {
         console.log(error);
       });
   }, []);
+  const deletetheexpense=(id)=>{
+    axios.delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
   return (
     <div>
       {Expense.length ? (
@@ -31,6 +37,7 @@ const ExpenseList = () => {
             {Expense.map((x) => {
               return (
                 <tr key={x.expenseId}>
+                  <td>{x.expenseId}</td>
                   <td>{x.amount}</td>
                   <td>{x.description}</td>
                   <td>{x.categoryId}</td>
@@ -39,6 +46,9 @@ const ExpenseList = () => {
                   </td>
                   <td>
                     <Link to={`update/${x.expenseId}`}>Update</Link>
+                  </td>
+                  <td>
+                    <button onClick={()=>deletetheexpense(x.expenseId)}>Delete</button>
                   </td>
                 </tr>
               );
@@ -49,7 +59,10 @@ const ExpenseList = () => {
       ) : (
         "No expenses Found"
       )}
+      <div></div>
       <Link to={`add`}>Add New Expense</Link>
+      <div></div>
+      <Link to={`../`}>Back</Link>
       
     </div>
   );

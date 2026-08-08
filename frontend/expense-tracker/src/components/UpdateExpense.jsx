@@ -4,7 +4,7 @@ import { updateExpense } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 const UpdateExpense = () => {
-      const params=useParams()
+  const params = useParams();
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
     amount: 0,
@@ -14,10 +14,10 @@ const UpdateExpense = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const updatetolist =  (e) => {
+  const updatetolist = (e) => {
     e.preventDefault();
     try {
-      const response =  axios.put(
+      const response = axios.put(
         "https://localhost:7273/Expense/UpdateExpense",
         newexpense,
       );
