@@ -1,6 +1,5 @@
 # Expense Tracker
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![.NET](https://img.shields.io/badge/.NET-8-blue)
 ![React](https://img.shields.io/badge/Frontend-React-blueviolet)
 
