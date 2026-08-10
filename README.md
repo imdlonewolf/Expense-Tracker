@@ -1,7 +1,7 @@
 # Expense Tracker
 
-![.NET](https://img.shields.io/badge/.NET-8-blue)
-![React](https://img.shields.io/badge/Frontend-React-blueviolet)
+![.NET](https://github.com/imdlonewolf/Expense-Tracker/tree/main/backend)
+![React](https://github.com/imdlonewolf/Expense-Tracker/tree/main/frontend)
 
 An intuitive, lightweight, and efficient personal finance management application to help you monitor daily expenses, organize spending categories, and maintain control over your finances.
 
