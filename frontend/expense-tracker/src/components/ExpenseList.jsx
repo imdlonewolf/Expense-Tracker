@@ -2,14 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddExpense from "./AddExpense";
 import { Link } from "react-router-dom";
-const ExpenseList = () => {
+const ExpenseList = ({userId}) => {
   let [Expense, SetExpense] = useState([]);
   let [Loading, SetLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("https://localhost:7273/Expense/GetAllExpenses/2")
+      .get(`https://localhost:7273/Expense/GetAllExpenses/${userId}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         SetExpense(response.data);
       })
       .catch((error) => {

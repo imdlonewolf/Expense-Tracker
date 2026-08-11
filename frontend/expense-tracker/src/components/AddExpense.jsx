@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addExpense } from "./redux/expenseSlicer";
+// import { useDispatch } from "react-redux";
+// import { addExpense } from "./redux/expenseSlicer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const AddExpense = () => {
@@ -10,7 +10,7 @@ const AddExpense = () => {
     categoryId: 1,
     userId: 2,
   });
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const addtolist = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const AddExpense = () => {
         "https://localhost:7273/Expense/AddExpense",
         newexpense,
       );
-      dispatch(addExpense(response.data));
+      // dispatch(addExpense(response.data));
       navigate("../");
     } catch (error) {
       console.log("Could not add", error);

@@ -5,10 +5,16 @@ import Login from "./components/Login";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [userId, setuserId] = useState(0);
   return (
     <>
       <AppRouter />
-      {loading ? <Login setLoading={setLoading} /> : <ExpenseList />}
+      {loading ? (
+        <Login setLoading={setLoading} setuserId={setuserId} />
+      ) : (
+        <ExpenseList userId={userId}/>
+      )}
+      {/* {userId} */}
     </>
   );
 }

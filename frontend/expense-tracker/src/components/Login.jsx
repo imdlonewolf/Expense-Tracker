@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Login = ({ setLoading }) => {
+const Login = ({ setLoading,setuserId }) => {
   const [User, SetUser] = useState({
     Name:"",
     Phone: "",
@@ -12,7 +12,7 @@ const Login = ({ setLoading }) => {
     axios.post("https://localhost:7273/User/Login", User)
     .then((response) => {
         setLoading(false);
-        console.log(response.data);
+        setuserId(response.data);
       })
     .catch((error) => {
       console.log(error);
