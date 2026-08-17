@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddExpense from "./AddExpense";
 import { Link } from "react-router-dom";
-import { makeexpenselist } from "./redux/expenseSlicer";
+import { makeexpenselist,deleteExpense } from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = ({ userId }) => {
   const Expense=useSelector(state=>state.expense.items)
@@ -23,6 +23,9 @@ const ExpenseList = ({ userId }) => {
   const deletetheexpense = (id) => {
     axios
       .delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
+      .then(()=>{
+        dispatch(deleteExpense(id));
+      })
       .catch((error) => {
         console.log(error);
       });

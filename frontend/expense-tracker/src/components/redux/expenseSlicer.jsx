@@ -16,9 +16,12 @@ const expenseSlicer = createSlice({
       var exp=state.items.find(x=>x.expenseId==id);
       exp.amount=action.payload.amount;
       exp.description=action.payload.description;
-      console.log(exp.amount);
+      // console.log(exp.amount);
     },
-    deleteExpense: () => {},
+    deleteExpense: (state,action) => {
+      var id=action.payload;
+      state.items=state.items.filter(x=>x.expenseId!=id);
+    },
   },
 });
 export const { addExpense, updateExpense, deleteExpense,makeexpenselist } =
