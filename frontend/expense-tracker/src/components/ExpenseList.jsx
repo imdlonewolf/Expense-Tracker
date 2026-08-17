@@ -2,35 +2,42 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddExpense from "./AddExpense";
 import { Link } from "react-router-dom";
-const ExpenseList = ({userId}) => {
-  let [Expense, SetExpense] = useState([]);
+import { makeexpenselist } from "./redux/expenseSlicer";
+import { useDispatch, useSelector } from "react-redux";
+const ExpenseList = ({ userId }) => {
+  const Expense=useSelector(state=>state.expense.items)
   let [Loading, SetLoading] = useState(true);
+  const dispatch=useDispatch()
   useEffect(() => {
     axios
       .get(`https://localhost:7273/Expense/GetAllExpenses/${userId}`)
       .then((response) => {
         // console.log(response.data);
-        SetExpense(response.data);
+        // SetExpense(response.data);
+        dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  const deletetheexpense=(id)=>{
-    axios.delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
-    .catch((error)=>{
-      console.log(error);
-    })
-  }
+  const deletetheexpense = (id) => {
+    axios
+      .delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       {Expense.length ? (
         <table border={1}>
           <thead>
             <tr>
+              <th>Id</th>
               <th>Amount</th>
               <th>Description</th>
               <th>Category</th>
+              <th>Button</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +55,9 @@ const ExpenseList = ({userId}) => {
                     <Link to={`update/${x.expenseId}`}>Update</Link>
                   </td>
                   <td>
-                    <button onClick={()=>deletetheexpense(x.expenseId)}>Delete</button>
+                    <button onClick={() => deletetheexpense(x.expenseId)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
@@ -63,7 +72,6 @@ const ExpenseList = ({userId}) => {
       <Link to={`add`}>Add New Expense</Link>
       <div></div>
       <Link to={`../`}>Back</Link>
-      
     </div>
   );
 };
