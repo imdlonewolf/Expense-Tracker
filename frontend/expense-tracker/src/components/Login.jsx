@@ -23,12 +23,12 @@ const Login = ({ setLoading,setuserId }) => {
       <form action="" onSubmit={loginvalidation}>
         <input
           type="text"
-          name="amount"
+          name="phone"
           onChange={(e) => SetUser({ ...User, Phone: e.target.value })}
         />
         <input
-          type="text"
-          name="description"
+          type="password"
+          name="password"
           onChange={(e) => SetUser({ ...User, Password: e.target.value })}
         />
         <button type="submit">Login</button>

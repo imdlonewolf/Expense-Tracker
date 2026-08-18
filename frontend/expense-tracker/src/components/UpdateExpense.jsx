@@ -14,19 +14,20 @@ const UpdateExpense = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const updatetolist = (e) => {
+  const updatetolist =async (e) => {
     e.preventDefault();
     try {
-      const response = axios.put(
+      const response =await axios.put(
         "https://localhost:7273/Expense/UpdateExpense",
         newexpense,
       );
       dispatch(updateExpense(newexpense));
-      navigate("../");
+      // navigate("../");
     } catch (error) {
       console.log("Could not add", error);
       console.log(JSON.stringify(error.response.data.errors, null, 2));
     }
+    navigate("../");
   };
   return (
     <div>

@@ -20,7 +20,7 @@ const AddExpense = () => {
         newexpense,
       );
       dispatch(addExpense(response.data));
-      // navigate("../");
+      navigate("../");
     } catch (error) {
       console.log("Could not add", error);
       console.log(JSON.stringify(error.response.data.errors, null, 2));
