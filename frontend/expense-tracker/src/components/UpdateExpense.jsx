@@ -22,12 +22,11 @@ const UpdateExpense = () => {
         newexpense,
       );
       dispatch(updateExpense(newexpense));
-      // navigate("../");
+      navigate("../");
     } catch (error) {
       console.log("Could not add", error);
       console.log(JSON.stringify(error.response.data.errors, null, 2));
     }
-    navigate("../");
   };
   return (
     <div>

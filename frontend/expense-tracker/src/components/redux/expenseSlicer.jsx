@@ -18,12 +18,15 @@ const expenseSlicer = createSlice({
       exp.description=action.payload.description;
       // console.log(exp.amount);
     },
+    detailsexpense: (state,action) => {
+      
+    },
     deleteExpense: (state,action) => {
       var id=action.payload;
       state.items=state.items.filter(x=>x.expenseId!=id);
     },
   },
 });
-export const { addExpense, updateExpense, deleteExpense,makeexpenselist } =
+export const { addExpense, updateExpense, deleteExpense,makeexpenselist,detailsexpense } =
   expenseSlicer.actions;
 export default expenseSlicer.reducer;
