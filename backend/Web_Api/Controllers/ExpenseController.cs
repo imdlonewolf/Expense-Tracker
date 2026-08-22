@@ -1,6 +1,7 @@
 ﻿using ExpenseLibrary.Model;
 using ExpenseLibrary.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Web_Api.Controllers
 {
@@ -14,15 +15,15 @@ namespace Web_Api.Controllers
             _repo = repo;
         }
         [HttpGet("{id}")]
-        public IActionResult GetAllExpenses(int id)
+        public async Task<IActionResult> GetAllExpenses(int id)
         {
-            List<Expense>expenses=_repo.GetExpenses(id);
+            List<Expense>expenses=await _repo.GetExpenses(id);
             return Ok(expenses);
         }
         [HttpGet("{id}", Name = "GetExpenseRoute")]
-        public IActionResult GetExpense(int id)
+        public async Task<IActionResult> GetExpense(int id)
         {
-            Expense expense = _repo.GetExpenseById(id);
+            Expense expense = await _repo.GetExpenseById(id);
             if (expense == null)
             {
                 return NotFound();
@@ -45,23 +46,23 @@ namespace Web_Api.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteExpense(int id)
+        public async Task<IActionResult> DeleteExpense(int id)
         {
-            if (_repo.DeleteExpense(id))
+            if (await _repo.DeleteExpense(id))
             {
                 return NoContent();
             }
             return NotFound();
         }
         [HttpPut]
-        public IActionResult UpdateExpense([FromBody]Expense e)
+        public async Task<IActionResult> UpdateExpense([FromBody]Expense e)
         {
-            Expense e1 = _repo.GetExpenseById(e.ExpenseId);
+            Expense e1 = await _repo.GetExpenseById(e.ExpenseId);
             if (e1 == null)
             {
                 return NotFound();
             }
-            if (_repo.UpdateExpense(e))
+            if (await _repo.UpdateExpense(e))
             {
                 return Ok();
             }

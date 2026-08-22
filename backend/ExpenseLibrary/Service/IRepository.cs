@@ -10,9 +10,9 @@ namespace ExpenseLibrary.Service
     public interface IRepository
     {
         public Task<bool> AddExpense(Expense expense);
-        public bool UpdateExpense(Expense expense);
-        public bool DeleteExpense(int id);
-        public List<Expense> GetExpenses(int userId);
-        public Expense GetExpenseById(int id);
+        public Task<bool> UpdateExpense(Expense expense);
+        public Task<bool> DeleteExpense(int id);
+        public Task<List<Expense>> GetExpenses(int userId);
+        public Task<Expense> GetExpenseById(int id);
     }
 }

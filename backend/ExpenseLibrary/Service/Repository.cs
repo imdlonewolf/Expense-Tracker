@@ -1,5 +1,6 @@
 ﻿using ExpenseLibrary.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,35 +24,35 @@ namespace ExpenseLibrary.Service
 
         
 
-        public bool DeleteExpense(int id)
+        public async Task<bool> DeleteExpense(int id)
         {
-            Expense e=GetExpenseById(id);
+            Expense e= await GetExpenseById(id);
             if (e == null)
             {
-                return false;
+                return  false;
             }
             _context.Remove(e);
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
 
 
-        public Expense GetExpenseById(int id)
+        public async Task<Expense> GetExpenseById(int id)
         {
-            Expense e = _context.Expenses.Find(id);
+            Expense e = await _context.Expenses.FindAsync(id);
             return e;
         }
 
-        public List<Expense> GetExpenses(int userId)
+        public async Task<List<Expense>> GetExpenses(int userId)
         {
-            return _context.Expenses.Where(x=>x.UserId==userId).ToList();
+            return await _context.Expenses.Where(x=>x.UserId==userId).ToListAsync();
         }
 
        
 
-        public bool UpdateExpense(Expense expense)
+        public async Task<bool> UpdateExpense(Expense expense)
         {
-            Expense e = GetExpenseById(expense.ExpenseId);
+            Expense e = await GetExpenseById(expense.ExpenseId);
             if (e == null)
             {
                 return false;
@@ -59,7 +60,7 @@ namespace ExpenseLibrary.Service
             e.Last_Update=DateTime.Now;
             e.Description = expense.Description;
             e.Amount = expense.Amount;
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         

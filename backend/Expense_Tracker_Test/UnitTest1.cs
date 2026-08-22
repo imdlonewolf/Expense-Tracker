@@ -34,7 +34,7 @@ namespace Expense_Tracker_Test
                 User = null      // Changed from None to null
             };
             _mockrepo.Setup(r => r.AddExpense(ex)).ReturnsAsync(true); 
-            var result =  _controller.AddExpense(ex);
+            var result =  await _controller.AddExpense(ex);
             Assert.That(result,Is.TypeOf<CreatedAtRouteResult>());
         }
     }
