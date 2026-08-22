@@ -15,10 +15,10 @@ namespace ExpenseLibrary.Service
         public Repository(ServiceContext context) {
             _context =context;
         }
-        public bool AddExpense(Expense expense)
+        public async Task<bool> AddExpense(Expense expense)
         {
-            _context.Expenses.Add(expense);
-            return _context.SaveChanges() > 0;
+            await _context.Expenses.AddAsync(expense);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         

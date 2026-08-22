@@ -33,9 +33,9 @@ namespace Web_Api.Controllers
             }
         }
         [HttpPost]
-        public IActionResult AddExpense([FromBody]Expense e)
+        public async Task<IActionResult> AddExpense([FromBody]Expense e)
         {
-            if (_repo.AddExpense(e))
+            if (await _repo.AddExpense(e))
             {
                 return CreatedAtRoute("GetExpenseRoute", new { id = e.ExpenseId }, e);
             }
