@@ -42,12 +42,11 @@
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\IRepository.cs",
               "RelativeDocumentMoniker": "ExpenseLibrary\\Service\\IRepository.cs",
-              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\IRepository.cs*",
-              "RelativeToolTip": "ExpenseLibrary\\Service\\IRepository.cs*",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\IRepository.cs",
+              "RelativeToolTip": "ExpenseLibrary\\Service\\IRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T16:03:58.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T16:03:58.635Z"
             },
             {
               "$type": "Document",
@@ -55,12 +54,11 @@
               "Title": "Repository.cs",
               "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\Repository.cs",
               "RelativeDocumentMoniker": "ExpenseLibrary\\Service\\Repository.cs",
-              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\Repository.cs*",
-              "RelativeToolTip": "ExpenseLibrary\\Service\\Repository.cs*",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\Repository.cs",
+              "RelativeToolTip": "ExpenseLibrary\\Service\\Repository.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAawC8AAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T16:04:00.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T16:04:00.67Z"
             },
             {
               "$type": "Document",
@@ -68,9 +66,9 @@
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Expense_Tracker_Test\\UnitTest1.cs",
               "RelativeDocumentMoniker": "Expense_Tracker_Test\\UnitTest1.cs",
-              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Expense_Tracker_Test\\UnitTest1.cs*",
-              "RelativeToolTip": "Expense_Tracker_Test\\UnitTest1.cs*",
-              "ViewState": "AgIAAA4AAAAAAAAAAIA3wCEAAAA9AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Expense_Tracker_Test\\UnitTest1.cs",
+              "RelativeToolTip": "Expense_Tracker_Test\\UnitTest1.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAgwCEAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-20T20:47:35.984Z",
               "EditorCaption": ""
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Web_Api\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-16T14:19:38.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-16T14:19:38.623Z"
             },
             {
               "$type": "Document",
@@ -94,12 +91,11 @@
               "Title": "ExpenseController.cs",
               "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Controllers\\ExpenseController.cs",
               "RelativeDocumentMoniker": "Web_Api\\Controllers\\ExpenseController.cs",
-              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Controllers\\ExpenseController.cs*",
-              "RelativeToolTip": "Web_Api\\Controllers\\ExpenseController.cs*",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\Controllers\\ExpenseController.cs",
+              "RelativeToolTip": "Web_Api\\Controllers\\ExpenseController.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAhwEAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-06T08:42:52.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-06T08:42:52.843Z"
             },
             {
               "$type": "Document",
@@ -111,8 +107,7 @@
               "RelativeToolTip": "ExpenseLibrary\\Model\\Expense.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAEwA8AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-28T16:09:24.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-28T16:09:24.011Z"
             }
           ]
         }

@@ -1,35 +1,42 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddExpense from "./AddExpense";
-import { Link } from "react-router-dom";
-import { makeexpenselist,deleteExpense } from "./redux/expenseSlicer";
+import { Link, useNavigate } from "react-router-dom";
+import { makeexpenselist, deleteExpense } from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
-const ExpenseList = ({ userId }) => {
-  const Expense=useSelector(state=>state.expense.items)
-  let [Loading, SetLoading] = useState(true);
-  const dispatch=useDispatch()
+const ExpenseList = () => {
+  const Expense = useSelector((state) => state.expense.items);
+  const id = useSelector((state) => state.expense.id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
+    if (id == 0) {
+      console.log("trying to move it to login page");
+      navigate("/login");
+      return;
+    }
     axios
-      .get(`https://localhost:7273/Expense/GetAllExpenses/${userId}`)
+      .get(`https://localhost:7273/Expense/GetAllExpenses/${id}`)
       .then((response) => {
-        // console.log(response.data);
-        // SetExpense(response.data);
         dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id, dispatch,navigate]);
   const deletetheexpense = (id) => {
     axios
       .delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
-      .then(()=>{
+      .then(() => {
         dispatch(deleteExpense(id));
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  if (id === 0) {
+    return null;
+  }
   return (
     <div>
       {Expense.length ? (
@@ -74,7 +81,7 @@ const ExpenseList = ({ userId }) => {
       <div></div>
       <Link to={`add`}>Add New Expense</Link>
       <div></div>
-      <Link to={`../`}>Back</Link>
+      {/* <Link to={`/`}>Back</Link> */}
     </div>
   );
 };
