@@ -3,11 +3,11 @@ const expenseSlicer = createSlice({
   name: "exp",
   initialState: {
     items: [],
-    id:0
+    userId:0
   },
   reducers: {
     login:(state,action)=>{
-      state.id=action.payload;
+      state.userId=action.payload;
     },
     makeexpenselist:(state,action)=>{
       state.items=action.payload
@@ -21,9 +21,6 @@ const expenseSlicer = createSlice({
       exp.amount=action.payload.amount;
       exp.description=action.payload.description;
       // console.log(exp.amount);
-    },
-    detailsexpense: (state,action) => {
-      
     },
     deleteExpense: (state,action) => {
       var id=action.payload;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./redux/expenseSlicer";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const Login = ({ setLoading,setuserId }) => {
+const Login = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [User, SetUser] = useState({

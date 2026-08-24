@@ -1,5 +1,4 @@
 import { Route, Router, Routes } from "react-router-dom";
-import EmployeeList from "./ExpenseList";
 import DetailsExpense from "./DetailsExpense";
 import UpdateExpense from "./UpdateExpense";
 import AddExpense from "./AddExpense";

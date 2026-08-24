@@ -6,24 +6,24 @@ import { makeexpenselist, deleteExpense } from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = () => {
   const Expense = useSelector((state) => state.expense.items);
-  const id = useSelector((state) => state.expense.id);
+  const userId = useSelector((state) => state.expense.userId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    if (id == 0) {
+    if (userId == 0) {
       console.log("trying to move it to login page");
       navigate("/login");
       return;
     }
     axios
-      .get(`https://localhost:7273/Expense/GetAllExpenses/${id}`)
+      .get(`https://localhost:7273/Expense/GetAllExpenses/${userId}`)
       .then((response) => {
         dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [id, dispatch,navigate]);
+  }, [userId, dispatch,navigate]);
   const deletetheexpense = (id) => {
     axios
       .delete(`https://localhost:7273/Expense/DeleteExpense/${id}`)
@@ -34,7 +34,7 @@ const ExpenseList = () => {
         console.log(error);
       });
   };
-  if (id === 0) {
+  if (userId === 0) {
     return null;
   }
   return (
