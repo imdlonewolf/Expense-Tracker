@@ -29,22 +29,35 @@ const UpdateExpense = () => {
     }
   };
   return (
-    <div>
-      <form action="" onSubmit={updatetolist}>
-        <input
+    <main className="page-shell">
+      <div className="brand-mark">ExpensePaglu</div>
+      <section className="form-page">
+        <p className="eyebrow">Edit entry</p>
+        <h1>Update expense</h1>
+        <p className="form-intro">Keep the details accurate so your spending history stays useful.</p>
+        <form className="surface form-card expense-form" action="" onSubmit={updatetolist}>
+          <div className="field">
+            <label htmlFor="amount">Amount</label>
+            <input
+              id="amount"
           type="number"
           name="amount"
           onChange={(e) =>
             setnewexpense({ ...newexpense, amount: e.target.value })
           }
-        />
-        <input
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="description">Description</label>
+            <input
+              id="description"
           type="text"
           name="description"
           onChange={(e) =>
             setnewexpense({ ...newexpense, description: e.target.value })
           }
-        />
+            />
+          </div>
         {/* <input
           type="number"
           name="category"
@@ -52,9 +65,10 @@ const UpdateExpense = () => {
             setnewexpense({ ...newexpense, category: e.target.value })
           }
         /> */}
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+          <button className="form-submit" type="submit">Save changes</button>
+        </form>
+      </section>
+    </main>
   );
 };
 export default UpdateExpense;

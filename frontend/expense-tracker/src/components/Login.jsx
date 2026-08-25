@@ -26,21 +26,35 @@ const Login = () => {
     });
   };
   return (
-    <div>
-      <form action="" onSubmit={loginvalidation}>
-        <input
+    <main className="page-shell">
+      <section className="auth-page">
+        <div className="brand-mark">ExpensePaglu</div>
+        <p className="eyebrow">Welcome back</p>
+        <h1>Sign in</h1>
+        <p className="form-intro">Pick up your spending story where you left off.</p>
+        <form className="surface form-card expense-form" action="" onSubmit={loginvalidation}>
+          <div className="field">
+            <label htmlFor="phone">Phone</label>
+            <input
+              id="phone"
           type="text"
           name="phone"
           onChange={(e) => SetUser({ ...User, Phone: e.target.value })}
-        />
-        <input
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
           type="password"
           name="password"
           onChange={(e) => SetUser({ ...User, Password: e.target.value })}
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+            />
+          </div>
+          <button className="form-submit" type="submit">Sign in</button>
+        </form>
+      </section>
+    </main>
   );
 };
 export default Login;
