@@ -1,4 +1,110 @@
+# C# / .NET Build artifacts
 bin/
 obj/
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.log
+
+# Visual Studio
 .vs/
 **/.vs/
+.vscode/
+**/.vscode/
+*.sln.user
+*.user
+*.userprefs
+*.suo
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# JetBrains / Rider
+.idea/
+.idea/**
+*.swp
+*.sln.iml
+*.iml
+riderModule.xml
+
+# Build Results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Xx]86/
+[Xx]64/
+[Ww][Ii][Nn]32/
+[Ww][Ii][Nn]64/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+.packages/
+
+# Node.js (Frontend)
+node_modules/
+dist/
+dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.local
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+.Thumbs.db
+
+# IDE-specific files
+*.swp
+*.swo
+*~
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Test Results
+TestResults/
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# Misc
+*.cab
+*.msi
+.sass-cache/
+$RECYCLE.BIN/
+ehthumbs.db
+.venv/
+venv/
+env/
+.python-version
