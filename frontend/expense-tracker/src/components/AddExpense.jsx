@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 const AddExpense = () => {
   const userId = useSelector((state) => state.expense.userId);
+  const baseurl = useSelector((state) => state.expense.baseUrl);
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
