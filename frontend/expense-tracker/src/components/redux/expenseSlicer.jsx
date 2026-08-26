@@ -4,7 +4,7 @@ const expenseSlicer = createSlice({
   initialState: {
     items: [],
     userId:0,
-    baseUrl: "https://localhost:7273/"
+    baseUrl: "http://expensepaglu-api.runasp.net/"
   },
   reducers: {
     login:(state,action)=>{
