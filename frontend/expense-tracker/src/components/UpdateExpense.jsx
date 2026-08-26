@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateExpense } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import axios from "axios";
 const UpdateExpense = () => {
+    const baseurl=useSelector((state) => state.expense.baseUrl);
   const params = useParams();
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
@@ -18,7 +21,7 @@ const UpdateExpense = () => {
     e.preventDefault();
     try {
       const response =await axios.put(
-        "https://localhost:7273/Expense/UpdateExpense",
+        `${baseurl}Expense/UpdateExpense`,
         newexpense,
       );
       dispatch(updateExpense(newexpense));

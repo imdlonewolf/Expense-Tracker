@@ -62,8 +62,7 @@
               "RelativeToolTip": "Web_Api\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAACEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-24T15:52:08.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-24T15:52:08.389Z"
             },
             {
               "$type": "Document",
@@ -73,7 +72,7 @@
               "RelativeDocumentMoniker": "ExpenseLibrary\\Service\\AuthServices.cs",
               "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\AuthServices.cs",
               "RelativeToolTip": "ExpenseLibrary\\Service\\AuthServices.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAApwBYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAIA7wBYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-24T15:51:23.369Z",
               "EditorCaption": ""
@@ -88,8 +87,7 @@
               "RelativeToolTip": "ExpenseLibrary\\Service\\IAuthServices.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-24T15:51:19.566Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-24T15:51:19.566Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "ExpenseLibrary\\Model\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-24T15:47:27.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-24T15:47:27.448Z"
             },
             {
               "$type": "Document",
@@ -138,8 +135,7 @@
               "RelativeToolTip": "Expense_Tracker_Test\\UnitTest1.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAgwCEAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-20T20:47:35.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T20:47:35.984Z"
             },
             {
               "$type": "Document",
@@ -175,8 +171,7 @@
               "RelativeToolTip": "ExpenseLibrary\\Model\\Expense.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAEwA8AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-28T16:09:24.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-28T16:09:24.011Z"
             }
           ]
         }

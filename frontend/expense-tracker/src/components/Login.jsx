@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/expenseSlicer";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+    const baseurl=useSelector((state) => state.expense.baseUrl);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [User, SetUser] = useState({
@@ -14,7 +16,7 @@ const Login = () => {
   });
   const loginvalidation = (e) => {
     e.preventDefault();
-    axios.post("https://localhost:7273/User/Login", User)
+    axios.post(`${baseurl}User/Login`, User)
     .then((response) => {
         // setLoading(false);
         // setuserId(response.data);
