@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseLibrary.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20260714183440_initial migration")]
-    partial class initialmigration
+    [Migration("20260825171452_db going live")]
+    partial class dbgoinglive
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

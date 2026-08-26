@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExpenseLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class dbgoinglive : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
