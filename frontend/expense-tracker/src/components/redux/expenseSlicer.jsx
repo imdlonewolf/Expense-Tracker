@@ -3,7 +3,8 @@ const expenseSlicer = createSlice({
   name: "exp",
   initialState: {
     items: [],
-    userId:0
+    userId:0,
+    baseUrl: "https://localhost:7273/"
   },
   reducers: {
     login:(state,action)=>{

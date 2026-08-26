@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "./redux/expenseSlicer";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 const AddExpense = () => {
+  const userId=useSelector((state) => state.expense.userId);
+  const baseurl=useSelector((state) => state.expense.baseUrl);
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
     categoryId: 1,
-    userId: 2,
+    userId: userId,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ const AddExpense = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://localhost:7273/Expense/AddExpense",
+        `${baseurl}Expense/AddExpense`,
         newexpense,
       );
       dispatch(addExpense(response.data));
