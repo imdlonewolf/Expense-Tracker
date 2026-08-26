@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontendCloud", policy =>
     {
-        policy.WithOrigins("https://expense-tracker-one-chi-42.vercel.app/")
+        policy.WithOrigins("https://expense-tracker-one-chi-42.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
