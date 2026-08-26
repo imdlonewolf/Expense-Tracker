@@ -18,6 +18,7 @@ namespace ExpenseLibrary.Service
         }
         public async Task<bool> AddExpense(Expense expense)
         {
+            expense.Expense_Date = expense.Last_Update = DateTime.UtcNow;
             await _context.Expenses.AddAsync(expense);
             return await _context.SaveChangesAsync() > 0;
         }
