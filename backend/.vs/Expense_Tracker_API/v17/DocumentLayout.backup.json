@@ -67,15 +67,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "Web_Api\\appsettings.Development.json",
-              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\Web_Api\\appsettings.Development.json",
-              "RelativeToolTip": "Web_Api\\appsettings.Development.json",
+              "DocumentIndex": 0,
+              "Title": "AuthServices.cs",
+              "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\AuthServices.cs",
+              "RelativeDocumentMoniker": "ExpenseLibrary\\Service\\AuthServices.cs",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\AuthServices.cs",
+              "RelativeToolTip": "ExpenseLibrary\\Service\\AuthServices.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAApwBYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T15:51:23.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAuthServices.cs",
+              "DocumentMoniker": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\IAuthServices.cs",
+              "RelativeDocumentMoniker": "ExpenseLibrary\\Service\\IAuthServices.cs",
+              "ToolTip": "C:\\Users\\nirjhar.a.das\\Downloads\\Expense_Tracker\\backend\\ExpenseLibrary\\Service\\IAuthServices.cs",
+              "RelativeToolTip": "ExpenseLibrary\\Service\\IAuthServices.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-25T16:30:23.22Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T15:51:19.566Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -111,7 +125,7 @@
               "RelativeToolTip": "ExpenseLibrary\\Service\\Repository.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAcwDwAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-22T16:04:00.67Z",
+              "WhenOpened": "2026-08-20T20:47:35.984Z",
               "EditorCaption": ""
             },
             {
