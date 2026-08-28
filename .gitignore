@@ -70,6 +70,7 @@ lerna-debug.log*
 .env
 .env.local
 .env.*.local
+backend/Web_Api/appsettings.Production.json
 
 # OS files
 .DS_Store
