@@ -22,22 +22,13 @@ builder.Services.AddScoped<IAuthServices, AuthServices>();
 //builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowFrontend", policy =>
-//    {
-//        policy.WithOrigins("http://localhost:5173")
-//        .AllowAnyHeader()
-//        .AllowAnyMethod();
-//    });
-//});
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontendCloud", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("https://expense-tracker-one-chi-42.vercel.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(builder.Configuration.GetConnectionString("FrontendBaseUrl"))
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
@@ -49,8 +40,7 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
-//app.UseCors("AllowFrontend");
-app.UseCors("AllowFrontendCloud");
+app.UseCors("AllowFrontend");
 //app.UseAuthentication();
 //app.UseAuthorization();
 app.UseHttpsRedirection();

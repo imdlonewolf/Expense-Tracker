@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateExpense } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +18,13 @@ const UpdateExpense = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    useEffect(() => {
+    if (userId == 0) {
+      console.log("trying to move it to login page");
+      navigate("/login");
+      return;
+    }
+  }, [userId, navigate]);
   const updatetolist = async (e) => {
     e.preventDefault();
     try {

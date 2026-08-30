@@ -24,7 +24,7 @@ const ExpenseList = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [userId, dispatch, navigate]);
+  }, [userId]);
   const deletetheexpense = (id) => {
     axios
       .delete(`${baseurl}Expense/DeleteExpense/${id}`)

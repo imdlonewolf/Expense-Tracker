@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "./redux/expenseSlicer";
 import { useNavigate } from "react-router-dom";
@@ -7,15 +7,21 @@ import axios from "axios";
 const AddExpense = () => {
   const userId = useSelector((state) => state.expense.userId);
   const baseurl = useSelector((state) => state.expense.baseUrl);
+  const navigate = useNavigate();
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
     categoryId: 1,
     userId: userId,
   });
+  useEffect(() => {
+    if (userId == 0) {
+      console.log("trying to move it to login page");
+      navigate("/login");
+      return;
+    }
+  }, [userId, navigate]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const addtolist = async (e) => {
     e.preventDefault();
     try {
