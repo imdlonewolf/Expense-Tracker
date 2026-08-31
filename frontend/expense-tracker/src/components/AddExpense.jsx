@@ -16,8 +16,7 @@ const AddExpense = () => {
   });
   useEffect(() => {
     if (userId == 0) {
-      console.log("trying to move it to login page");
-      navigate("/login");
+      navigate("/pleaselogin");
       return;
     }
   }, [userId, navigate]);
@@ -32,10 +31,12 @@ const AddExpense = () => {
       dispatch(addExpense(response.data));
       navigate("../");
     } catch (error) {
-      console.log("Could not add", error);
-      console.log(JSON.stringify(error.response.data.errors, null, 2));
+      navigate("/error");
     }
   };
+  if (userId === 0) {
+    return null;
+  }
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>

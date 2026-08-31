@@ -12,7 +12,6 @@ const ExpenseList = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (userId == 0) {
-      console.log("trying to move it to login page");
       navigate("/login");
       return;
     }
@@ -22,7 +21,7 @@ const ExpenseList = () => {
         dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
-        console.log(error);
+        navigate("/error");
       });
   }, [userId]);
   const deletetheexpense = (id) => {
@@ -32,7 +31,7 @@ const ExpenseList = () => {
         dispatch(deleteExpense(id));
       })
       .catch((error) => {
-        console.log(error);
+        navigate("/error");
       });
   };
   if (userId === 0) {

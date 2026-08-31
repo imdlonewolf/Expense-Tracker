@@ -11,24 +11,14 @@ const DetailsExpense = () => {
   const ex = useSelector((state) =>
     state.expense.items.find((item) => item.expenseId == params.id),
   );
-  // useEffect(() => {
-  //   if (userId == 0) {
-  //     console.log("trying to move it to login page");
-  //     navigate("/login");
-  //     return;
-  //   }
-  // }, [userId, navigate]);
+  useEffect(() => {
+    if (userId == 0) {
+      navigate("/pleaselogin");
+      return;
+    }
+  }, [userId, navigate]);
   if (userId == 0) {
-    return (
-      <div className="surface form-card">
-        Please Login to go Ahead 😁 
-        <div>
-          <Link className="primary-action" to={`/login`}>
-            Login
-          </Link>
-        </div>
-      </div>
-    );
+    return null;
   }
   return (
     <main className="page-shell">
