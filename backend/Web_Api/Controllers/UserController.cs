@@ -12,10 +12,10 @@ namespace Web_Api.Controllers
     {
         private readonly IAuthServices _repo;
         private readonly IJwtService _jwt;
-        public UserController(IAuthServices repo /*,IJwtService jwt*/)
+        public UserController(IAuthServices repo ,IJwtService jwt)
         {
             _repo = repo;
-            //_jwt = jwt;
+            _jwt = jwt;
         }
         [HttpPost]
         public IActionResult Login([FromBody]User user)
@@ -23,7 +23,7 @@ namespace Web_Api.Controllers
             User u = _repo.Login(user.Phone, user.Password);
             if(u!=null)
             {
-                //var token=_jwt.GenerateToken(u);
+                var token=_jwt.GenerateToken(u);
                 return Ok(u.UserId);
             }
             return BadRequest();

@@ -15,11 +15,11 @@ builder.Services.AddDbContext<ServiceContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-//builder.Services.Configure<JwtSettings>(
-//    builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<IRepository,Repository>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
-//builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
@@ -41,8 +41,8 @@ var app = builder.Build();
     app.UseSwaggerUI();
 //}
 app.UseCors("AllowFrontend");
-//app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseHttpsRedirection();
 
 
