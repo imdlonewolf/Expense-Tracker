@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./redux/expenseSlicer";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const baseurl=useSelector((state) => state.expense.baseUrl);
@@ -20,7 +21,10 @@ const Login = () => {
     .then((response) => {
         // setLoading(false);
         // setuserId(response.data);
-        dispatch(login(response.data));
+        var token=response.data;
+        const decoded = jwtDecode(token);
+        const id=decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+        dispatch(login(id));
         navigate("/");
       })
     .catch((error) => {

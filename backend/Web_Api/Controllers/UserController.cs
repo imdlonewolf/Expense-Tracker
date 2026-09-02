@@ -24,7 +24,7 @@ namespace Web_Api.Controllers
             if(u!=null)
             {
                 var token=_jwt.GenerateToken(u);
-                return Ok(u.UserId);
+                return Ok(token);
             }
             return BadRequest();
         }
