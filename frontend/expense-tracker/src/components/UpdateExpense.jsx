@@ -35,8 +35,8 @@ const UpdateExpense = () => {
       navigate("../");
     } catch (error) {
       navigate("/error");
-      console.log("Could not add", error);
-      console.log(JSON.stringify(error.response.data.errors, null, 2));
+      // console.log("Could not add", error);
+      // console.log(JSON.stringify(error.response.data.errors, null, 2));
     }
   };
   if (userId === 0) {
