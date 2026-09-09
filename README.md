@@ -44,7 +44,7 @@ How it fits together:
 ## Quick start (shortest path to run locally)
 
 Prerequisites
-- .NET SDK (6.0+ recommended)
+- .NET SDK (8.0+ recommended)
 - Node.js (16+ recommended) and npm
 - A relational database (SQL Server / SQLite / Postgres) and a connection string, or use LocalDB for development
 - (Optional) dotnet-ef tool if you will apply migrations via CLI: `dotnet tool install --global dotnet-ef`
