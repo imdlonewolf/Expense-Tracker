@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = () => {
   const Expense = useSelector((state) => state.expense.items);
   const userId = useSelector((state) => state.expense.userId);
+  const token=useSelector((state) => state.expense.token);
   const baseurl = useSelector((state) => state.expense.baseUrl);
   const dispatch = useDispatch();
   const navigate = useNavigate();

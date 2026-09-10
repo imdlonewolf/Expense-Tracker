@@ -22,8 +22,7 @@ const Login = () => {
         // setLoading(false);
         // setuserId(response.data);
         var token=response.data;
-        const decoded = jwtDecode(token);
-        dispatch(login(decoded));
+        dispatch(login(token));
         navigate("/");
       })
     .catch((error) => {
