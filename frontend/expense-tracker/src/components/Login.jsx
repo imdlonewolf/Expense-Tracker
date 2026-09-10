@@ -23,8 +23,7 @@ const Login = () => {
         // setuserId(response.data);
         var token=response.data;
         const decoded = jwtDecode(token);
-        const id=decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-        dispatch(login(id));
+        dispatch(login(decoded));
         navigate("/");
       })
     .catch((error) => {

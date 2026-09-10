@@ -3,13 +3,15 @@ const expenseSlicer = createSlice({
   name: "exp",
   initialState: {
     items: [],
+    token:'',
     userId:0,
     baseUrl: "https://localhost:7273/"
     // baseUrl: "https://expensepaglu-api.runasp.net/"
   },
   reducers: {
     login:(state,action)=>{
-      state.userId=action.payload;
+      state.token=action.payload;
+      state.userId=decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
     },
     makeexpenselist:(state,action)=>{
       state.items=action.payload
