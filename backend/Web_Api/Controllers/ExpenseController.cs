@@ -1,6 +1,8 @@
 ﻿using ExpenseLibrary.Model;
 using ExpenseLibrary.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Web_Api.Controllers
@@ -14,9 +16,11 @@ namespace Web_Api.Controllers
         {
             _repo = repo;
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAllExpenses(int id)
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetAllExpenses()
         {
+            int id= Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             List<Expense>expenses=await _repo.GetExpenses(id);
             return Ok(expenses);
         }
