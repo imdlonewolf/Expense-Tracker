@@ -20,8 +20,11 @@ namespace Web_Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllExpenses()
         {
+            //var authHeader = Request.Headers["Authorization"].ToString();
+            //Console.WriteLine(authHeader);
             int id= Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             List<Expense>expenses=await _repo.GetExpenses(id);
+            //Console.WriteLine(ClaimTypes.NameIdentifier);
             return Ok(expenses);
         }
         [HttpGet("{id}", Name = "GetExpenseRoute")]
