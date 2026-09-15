@@ -25,15 +25,16 @@ namespace ExpenseLibrary.Service
 
         
 
-        public async Task<bool> DeleteExpense(int id)
+        public async Task<bool> DeleteExpense(int id,int userId)
         {
             Expense e= await GetExpenseById(id);
-            if (e == null)
+
+             if ((e!=null) &&( e.UserId == userId))
             {
-                return  false;
+                _context.Remove(e);
+                return await _context.SaveChangesAsync() > 0;
             }
-            _context.Remove(e);
-            return await _context.SaveChangesAsync() > 0;
+            return false;
         }
 
 

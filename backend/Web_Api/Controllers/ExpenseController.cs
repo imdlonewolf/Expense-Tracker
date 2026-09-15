@@ -40,9 +40,12 @@ namespace Web_Api.Controllers
                 return Ok(expense);
             }
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddExpense([FromBody]Expense e)
         {
+            int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            e.UserId = id;
             if (await _repo.AddExpense(e))
             {
                 return CreatedAtRoute("GetExpenseRoute", new { id = e.ExpenseId }, e);
@@ -52,18 +55,23 @@ namespace Web_Api.Controllers
                 return BadRequest(); 
             }
         }
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExpense(int id)
         {
-            if (await _repo.DeleteExpense(id))
+            int userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            if (await _repo.DeleteExpense(id,userId))
             {
                 return NoContent();
             }
             return NotFound();
         }
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateExpense([FromBody]Expense e)
         {
+            int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            e.UserId = id;
             Expense e1 = await _repo.GetExpenseById(e.ExpenseId);
             if (e1 == null)
             {

@@ -11,7 +11,7 @@ namespace ExpenseLibrary.Service
     {
         public Task<bool> AddExpense(Expense expense);
         public Task<bool> UpdateExpense(Expense expense);
-        public Task<bool> DeleteExpense(int id);
+        public Task<bool> DeleteExpense(int id,int userId);
         public Task<List<Expense>> GetExpenses(int userId);
         public Task<Expense> GetExpenseById(int id);
     }
