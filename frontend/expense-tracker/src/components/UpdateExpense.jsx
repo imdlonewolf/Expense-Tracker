@@ -9,12 +9,12 @@ const UpdateExpense = () => {
   const baseurl = useSelector((state) => state.expense.baseUrl);
   const params = useParams();
   const userId = useSelector((state) => state.expense.userId);
+  const token = useSelector((state) => state.expense.token);
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
     amount: 0,
     description: "",
     categoryId: 1,
-    userId: userId,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +29,11 @@ const UpdateExpense = () => {
     try {
       const response = await axios.put(
         `${baseurl}Expense/UpdateExpense`,
-        newexpense,
+        newexpense, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
       );
       dispatch(updateExpense(newexpense));
       navigate("../");

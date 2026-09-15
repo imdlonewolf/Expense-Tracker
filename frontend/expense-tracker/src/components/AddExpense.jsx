@@ -12,8 +12,8 @@ const AddExpense = () => {
     amount: 0,
     description: "",
     categoryId: 1,
-    userId: userId,
   });
+  const token=useSelector((state) => state.expense.token);
   useEffect(() => {
     if (userId == 0) {
       navigate("/pleaselogin");
@@ -26,7 +26,11 @@ const AddExpense = () => {
     try {
       const response = await axios.post(
         `${baseurl}Expense/AddExpense`,
-        newexpense,
+        newexpense, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
       );
       dispatch(addExpense(response.data));
       navigate("../");

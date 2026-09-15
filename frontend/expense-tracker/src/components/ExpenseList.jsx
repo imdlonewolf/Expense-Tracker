@@ -33,7 +33,11 @@ const ExpenseList = () => {
   }, [userId]);
   const deletetheexpense = (id) => {
     axios
-      .delete(`${baseurl}Expense/DeleteExpense/${id}`)
+      .delete(`${baseurl}Expense/DeleteExpense/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         dispatch(deleteExpense(id));
       })
