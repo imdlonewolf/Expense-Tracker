@@ -2,3 +2,4 @@
 --if no userid in redux --- redirect to errorpage(asks to relogin)
 2. JWt enabled,token received after login,
 userid retrieved from token and sent for each api request
+3. CORS improved -- diff link for local and prod-- all saved in separate appsettings.json
