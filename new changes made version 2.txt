@@ -1,0 +1,4 @@
+1. Access of Any page not possible without login
+--if no userid in redux --- redirect to errorpage(asks to relogin)
+2. JWt enabled,token received after login,
+userid retrieved from token and sent for each api request
