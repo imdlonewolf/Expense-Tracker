@@ -14,12 +14,6 @@ const AddExpense = () => {
     categoryId: 1,
   });
   const token=useSelector((state) => state.expense.token);
-  useEffect(() => {
-    if (userId == 0) {
-      navigate("/pleaselogin");
-      return;
-    }
-  }, [userId, navigate]);
   const dispatch = useDispatch();
   const addtolist = async (e) => {
     e.preventDefault();

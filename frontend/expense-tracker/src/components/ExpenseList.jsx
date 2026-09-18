@@ -9,13 +9,11 @@ const ExpenseList = () => {
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
   const baseurl = useSelector((state) => state.expense.baseUrl);
+const hasLoadedExpenses = useSelector( state => state.expense.hasLoadedExpenses );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    if (userId == 0) {
-      navigate("/login");
-      return;
-    }
+    if (hasLoadedExpenses) return;
     axios
       .get(`${baseurl}Expense/GetAllExpenses/`, {
         headers: {
@@ -30,7 +28,7 @@ const ExpenseList = () => {
         console.log(error.response);
         navigate("/error");
       });
-  }, [userId]);
+  }, [hasLoadedExpenses]);
   const deletetheexpense = (id) => {
     axios
       .delete(`${baseurl}Expense/DeleteExpense/${id}`, {

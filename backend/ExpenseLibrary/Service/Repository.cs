@@ -55,7 +55,7 @@ namespace ExpenseLibrary.Service
         public async Task<bool> UpdateExpense(Expense expense)
         {
             Expense e = await GetExpenseById(expense.ExpenseId);
-            if (e == null)
+            if (e == null || e.UserId!=expense.UserId)
             {
                 return false;
             }

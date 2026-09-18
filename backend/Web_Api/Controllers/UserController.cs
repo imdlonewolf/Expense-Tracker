@@ -1,5 +1,6 @@
 ﻿using ExpenseLibrary.Model;
 using ExpenseLibrary.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,7 @@ namespace Web_Api.Controllers
                 return NotFound();
             }
         }
+        [Authorize]
         [HttpPut]
         public IActionResult AccountUpdate([FromBody] User u)
         {

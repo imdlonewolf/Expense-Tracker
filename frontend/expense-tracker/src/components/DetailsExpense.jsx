@@ -11,12 +11,6 @@ const DetailsExpense = () => {
   const ex = useSelector((state) =>
     state.expense.items.find((item) => item.expenseId == params.id),
   );
-  useEffect(() => {
-    if (userId == 0) {
-      navigate("/pleaselogin");
-      return;
-    }
-  }, [userId, navigate]);
   if (userId == 0) {
     return null;
   }

@@ -27,6 +27,7 @@ namespace Web_Api.Controllers
             //Console.WriteLine(ClaimTypes.NameIdentifier);
             return Ok(expenses);
         }
+        [Authorize]
         [HttpGet("{id}", Name = "GetExpenseRoute")]
         public async Task<IActionResult> GetExpense(int id)
         {
@@ -73,7 +74,7 @@ namespace Web_Api.Controllers
             int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             e.UserId = id;
             Expense e1 = await _repo.GetExpenseById(e.ExpenseId);
-            if (e1 == null)
+            if (e1 == null || e1.UserId!=id)
             {
                 return NotFound();
             }

@@ -18,12 +18,6 @@ const UpdateExpense = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    useEffect(() => {
-    if (userId == 0) {
-      navigate("/pleaselogin");
-      return;
-    }
-  }, [userId, navigate]);
   const updatetolist = async (e) => {
     e.preventDefault();
     try {

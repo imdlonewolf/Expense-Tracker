@@ -9,6 +9,7 @@ const expenseSlicer = createSlice({
     userId: 0,
     baseUrl: "https://localhost:7273/",
     // baseUrl: "https://expensepaglu-api.runasp.net/"
+    hasLoadedExpenses: false,
   },
   reducers: {
     login: (state, action) => {
@@ -19,6 +20,7 @@ const expenseSlicer = createSlice({
     },
     makeexpenselist: (state, action) => {
       state.items = action.payload;
+      state.hasLoadedExpenses = true;
     },
     addExpense: (state, action) => {
       state.items.push(action.payload);

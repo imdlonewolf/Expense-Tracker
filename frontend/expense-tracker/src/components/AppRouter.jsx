@@ -4,18 +4,20 @@ import UpdateExpense from "./UpdateExpense";
 import AddExpense from "./AddExpense";
 import Login from "./Login";
 import ExpenseList from "./ExpenseList";
-import PleaseLogin from "./PleaseLogin";
+// import PleaseLogin from "./PleaseLogin";
 import ErrorPage from "./ErrorPage";
+import ProtectedRoute from "./ProtectedRoute";
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<ExpenseList/>}/>
-      <Route path="/add" element={<AddExpense />}/>
-      <Route path="/error" element={<ErrorPage/>}/>
-      <Route path="/pleaselogin" element={<PleaseLogin />}/>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/details/:id" element={<DetailsExpense/>}/>
-      <Route path="/update/:id" element={<UpdateExpense/>}/>
+      <Route path="/login" element={<Login />} />
+      <Route path="/error" element={<ErrorPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<ExpenseList />} />
+        <Route path="/add" element={<AddExpense />} />
+        <Route path="/details/:id" element={<DetailsExpense />} />
+        <Route path="/update/:id" element={<UpdateExpense />} />
+      </Route>
     </Routes>
   );
 };
