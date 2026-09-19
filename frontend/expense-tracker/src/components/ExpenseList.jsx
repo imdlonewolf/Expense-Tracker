@@ -9,17 +9,20 @@ const ExpenseList = () => {
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
   const baseurl = useSelector((state) => state.expense.baseUrl);
-const hasLoadedExpenses = useSelector( state => state.expense.hasLoadedExpenses );
+  const hasLoadedExpenses = useSelector(
+    (state) => state.expense.hasLoadedExpenses,
+  );
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     if (hasLoadedExpenses) return;
     axios
-      .get(`${baseurl}Expense/GetAllExpenses/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`${baseurl}Expense/GetAllExpenses/`, authConfig)
       .then((response) => {
         dispatch(makeexpenselist(response.data));
       })
@@ -31,11 +34,7 @@ const hasLoadedExpenses = useSelector( state => state.expense.hasLoadedExpenses 
   }, [hasLoadedExpenses]);
   const deletetheexpense = (id) => {
     axios
-      .delete(`${baseurl}Expense/DeleteExpense/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(`${baseurl}Expense/DeleteExpense/${id}`, authConfig)
       .then(() => {
         dispatch(deleteExpense(id));
       })

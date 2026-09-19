@@ -13,18 +13,20 @@ const AddExpense = () => {
     description: "",
     categoryId: 1,
   });
-  const token=useSelector((state) => state.expense.token);
+  const token = useSelector((state) => state.expense.token);
   const dispatch = useDispatch();
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const addtolist = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         `${baseurl}Expense/AddExpense`,
-        newexpense, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+        newexpense,
+        authConfig,
       );
       dispatch(addExpense(response.data));
       navigate("../");

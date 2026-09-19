@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateExpense } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +10,11 @@ const UpdateExpense = () => {
   const params = useParams();
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
     amount: 0,
@@ -23,11 +28,8 @@ const UpdateExpense = () => {
     try {
       const response = await axios.put(
         `${baseurl}Expense/UpdateExpense`,
-        newexpense, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+        newexpense,
+        authConfig,
       );
       dispatch(updateExpense(newexpense));
       navigate("../");
