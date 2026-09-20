@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Web_Api.Model;
 
 namespace ExpenseLibrary.Service
 {
@@ -37,7 +38,10 @@ namespace ExpenseLibrary.Service
             return false;
         }
 
-
+        public async Task<List<Category>> GetCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
 
         public async Task<Expense> GetExpenseById(int id)
         {
@@ -45,12 +49,25 @@ namespace ExpenseLibrary.Service
             return e;
         }
 
-        public async Task<List<Expense>> GetExpenses(int userId)
+
+        public async Task<List<ExpenseDto>> GetExpenses(int userId)
         {
-            return await _context.Expenses.Where(x=>x.UserId==userId).ToListAsync();
+            return await (
+                from e in _context.Expenses
+                join c in _context.Categories
+                    on e.CategoryId equals c.CategoryId
+                where e.UserId == userId
+                select new ExpenseDto
+                {
+                    ExpenseId = e.ExpenseId,
+                    Amount = e.Amount,
+                    Description = e.Description,
+                    CategoryName = c.CategoryName
+                }
+            ).ToListAsync();
         }
 
-       
+
 
         public async Task<bool> UpdateExpense(Expense expense)
         {

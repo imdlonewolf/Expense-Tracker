@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Web_Api.Model;
 
 namespace Web_Api.Controllers
 {
@@ -23,7 +24,7 @@ namespace Web_Api.Controllers
             //var authHeader = Request.Headers["Authorization"].ToString();
             //Console.WriteLine(authHeader);
             int id= Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            List<Expense>expenses=await _repo.GetExpenses(id);
+            List<ExpenseDto>expenses=await _repo.GetExpenses(id);
             //Console.WriteLine(ClaimTypes.NameIdentifier);
             return Ok(expenses);
         }

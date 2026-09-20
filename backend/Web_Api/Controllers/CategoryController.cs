@@ -1,20 +1,24 @@
-﻿using ExpenseLibrary.Service;
+﻿using ExpenseLibrary.Model;
+using ExpenseLibrary.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_Api.Controllers
 {
     [ApiController]
-    [Route("/[controller]")]
+    [Route("/[controller]/[action]")]
     public class CategoryController : Controller
     {
         private readonly IRepository _repo;
         public CategoryController(IRepository repo) { 
             _repo=repo;
         }
+        [Authorize]
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> GetAllCategories()
         {
-            return Ok();
+            List<Category>categories=await _repo.GetCategories();
+            return Ok(categories);
         }
     }
 }

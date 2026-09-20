@@ -78,7 +78,7 @@ const ExpenseList = () => {
                     <td>{x.description}</td>
                     <td>
                       <span className="category-pill">
-                        Category {x.categoryId}
+                         {x.categoryName}
                       </span>
                     </td>
                     <td className="actions">
