@@ -3,3 +3,14 @@
 2. JWt enabled,token received after login,
 userid retrieved from token and sent for each api request
 3. CORS improved -- diff link for local and prod-- all saved in separate appsettings.json
+
+
+1.2.CategoryController is still an empty stub — implement it and stop hardcoding categoryId: 1
+2.Model validation + a global exception handler
+3.DTOs instead of binding controllers directly to Expense/User entities
+4.Pagination on GetAllExpenses
+
+insert into Categories values('Utilities')
+insert into Categories values('Transport')
+insert into Categories values('LifeStyle')
+insert into Categories values('Health')
