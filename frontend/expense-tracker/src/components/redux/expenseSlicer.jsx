@@ -5,6 +5,7 @@ const expenseSlicer = createSlice({
   name: "exp",
   initialState: {
     items: [],
+    categories: [],
     token: "",
     userId: 0,
     baseUrl: "https://localhost:7273/",
@@ -22,15 +23,22 @@ const expenseSlicer = createSlice({
       state.items = action.payload;
       state.hasLoadedExpenses = true;
     },
+    getcategories: (state, action) => {
+      state.categories = action.payload;
+    },
     addExpense: (state, action) => {
+      var exp=action.payload;
+      var cat=state.categories.find((x)=>x.categoryId==exp.categoryId);
+      exp.categoryName=cat.categoryName;
       state.items.push(action.payload);
     },
     updateExpense: (state, action) => {
       var id = action.payload.expenseId;
       var exp = state.items.find((x) => x.expenseId == id);
+      exp.categoryName=state.categories.find((x)=>x.categoryId==action.payload.categoryId).categoryName;
       exp.amount = action.payload.amount;
       exp.description = action.payload.description;
-      // console.log(exp.amount);
+      // console.log(exp.categoryName);
     },
     deleteExpense: (state, action) => {
       var id = action.payload;
@@ -43,6 +51,7 @@ export const {
   updateExpense,
   deleteExpense,
   makeexpenselist,
+  getcategories,
   detailsexpense,
   login,
 } = expenseSlicer.actions;

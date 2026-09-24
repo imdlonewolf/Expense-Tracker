@@ -8,10 +8,11 @@ const AddExpense = () => {
   const userId = useSelector((state) => state.expense.userId);
   const baseurl = useSelector((state) => state.expense.baseUrl);
   const navigate = useNavigate();
+  const categories = useSelector((state) => state.expense.categories);
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
-    categoryId: 1,
+    categoryId: 0,
   });
   const token = useSelector((state) => state.expense.token);
   const dispatch = useDispatch();
@@ -73,13 +74,21 @@ const AddExpense = () => {
               }
             />
           </div>
-          {/* <input
-          type="number"
-          name="category"
-          onChange={(e) =>
-            setnewexpense({ ...newexpense, category: e.target.value })
-          }
-        /> */}
+          <div className="field">
+            <label htmlFor="categoryId">Category</label>
+            <select
+              value={newexpense.categoryId}
+              onChange={(e) =>
+                setnewexpense({ ...newexpense, categoryId: e.target.value })
+              }
+            >
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button className="form-submit" type="submit">
             Save expense
           </button>

@@ -23,11 +23,11 @@ const Login = () => {
         // setuserId(response.data);
         var token=response.data;
         dispatch(login(token));
-        console.log("trying to login");
+        // console.log("trying to login");
         navigate("/");
       })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       navigate("/Error");
     });
   };

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddExpense from "./AddExpense";
 import { Link, useNavigate } from "react-router-dom";
-import { makeexpenselist, deleteExpense } from "./redux/expenseSlicer";
+import { makeexpenselist, deleteExpense,getcategories } from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = () => {
   const Expense = useSelector((state) => state.expense.items);
@@ -27,8 +27,18 @@ const ExpenseList = () => {
         dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
-        console.log(token);
-        console.log(error.response);
+        // console.log(token);
+        // console.log(error.response);
+        navigate("/error");
+      });
+      axios.get(`${baseurl}Category/GetAllCategories`, authConfig)
+      .then((response) => {
+        dispatch(getcategories(response.data));
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        // console.log(token);
+        // console.log(error.response);
         navigate("/error");
       });
   }, [hasLoadedExpenses]);

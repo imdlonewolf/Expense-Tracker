@@ -30,7 +30,7 @@ const DetailsExpense = () => {
             <tr>
               <td>{ex.amount}</td>
               <td>{ex.description}</td>
-              <td>{ex.categoryId}</td>
+              <td>{ex.categoryName}</td>
             </tr>
           </table>
         </div>

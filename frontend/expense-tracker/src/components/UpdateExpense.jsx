@@ -10,6 +10,8 @@ const UpdateExpense = () => {
   const params = useParams();
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
+  const expense=useSelector((state) => state.expense.items.find((item) => item.expenseId === Number(params.id)));
+  const categories = useSelector((state) => state.expense.categories);
   const authConfig = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -17,9 +19,10 @@ const UpdateExpense = () => {
   };
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
-    amount: 0,
-    description: "",
-    categoryId: 1,
+    amount: expense?.amount || 0,
+    description: expense?.description || "",
+    categoryId: expense?.categoryId ||   1,
+    categoryName: expense?.categoryName || "",
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,6 +49,7 @@ const UpdateExpense = () => {
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
       <section className="form-page">
+        {console.log(newexpense)}
         <p className="eyebrow">Edit entry</p>
         <h1>Update expense</h1>
         <p className="form-intro">
@@ -62,6 +66,7 @@ const UpdateExpense = () => {
               id="amount"
               type="number"
               name="amount"
+              value={newexpense.amount}
               onChange={(e) =>
                 setnewexpense({ ...newexpense, amount: e.target.value })
               }
@@ -73,18 +78,27 @@ const UpdateExpense = () => {
               id="description"
               type="text"
               name="description"
+              value={newexpense.description}
               onChange={(e) =>
                 setnewexpense({ ...newexpense, description: e.target.value })
               }
             />
           </div>
-          {/* <input
-          type="number"
-          name="category"
-          onChange={(e) =>
-            setnewexpense({ ...newexpense, category: e.target.value })
-          }
-        /> */}
+          <div className="field">
+            <label htmlFor="categoryId">Category</label>
+            <select
+              value={newexpense.categoryId}
+              onChange={(e) =>
+                setnewexpense({ ...newexpense, categoryId: e.target.value })
+              }
+            >
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button className="form-submit" type="submit">
             Save changes
           </button>

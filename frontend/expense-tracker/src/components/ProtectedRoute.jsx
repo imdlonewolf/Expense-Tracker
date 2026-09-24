@@ -5,8 +5,8 @@ const ProtectedRoute = () => {
     
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
-  console.log(token);
-  console.log(userId);
+  // console.log(token);
+  // console.log(userId);
   const isauthenticated = userId !== 0 && token !== "";
   return isauthenticated ? <Outlet /> : <Login />;
 };

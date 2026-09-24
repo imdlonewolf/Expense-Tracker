@@ -62,6 +62,7 @@ namespace ExpenseLibrary.Service
                     ExpenseId = e.ExpenseId,
                     Amount = e.Amount,
                     Description = e.Description,
+                    CategoryId=e.CategoryId,
                     CategoryName = c.CategoryName
                 }
             ).ToListAsync();
@@ -79,6 +80,7 @@ namespace ExpenseLibrary.Service
             e.Last_Update=DateTime.Now;
             e.Description = expense.Description;
             e.Amount = expense.Amount;
+            e.CategoryId = expense.CategoryId;
             return await _context.SaveChangesAsync() > 0;
         }
 
