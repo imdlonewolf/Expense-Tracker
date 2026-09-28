@@ -33,7 +33,7 @@ namespace Web_Api.Controllers
         public async Task<IActionResult> GetExpense(int id)
         {
             int userid = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            ExpenseDto expense = await _repo.GetExpenseById(id);
+            Expense expense = await _repo.GetExpenseById(id);
             if (expense == null || userid!=expense.UserId)
             {
                 return NotFound();
@@ -75,7 +75,7 @@ namespace Web_Api.Controllers
         {
             int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             e.UserId = id;
-            ExpenseDto e1 = await _repo.GetExpenseById(e.ExpenseId);
+            Expense e1 = await _repo.GetExpenseById(e.ExpenseId);
             if (e1 == null || e1.UserId!=id)
             {
                 return NotFound();
