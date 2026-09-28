@@ -16,5 +16,6 @@ namespace ExpenseLibrary.Service
         public Task<List<ExpenseDto>> GetExpenses(int userId);
         public Task<Expense> GetExpenseById(int id);
         public Task<List<Category>> GetCategories();
+        public Task<string> GetCategoryById(int id);
     }
 }

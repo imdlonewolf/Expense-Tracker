@@ -13,6 +13,7 @@ const AddExpense = () => {
     amount: 0,
     description: "",
     categoryId: 0,
+    categoryName: "",
   });
   const token = useSelector((state) => state.expense.token);
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ const AddExpense = () => {
       dispatch(addExpense(response.data));
       navigate("../");
     } catch (error) {
+      console.log("Could not add", error);
+      console.log(JSON.stringify(error.response.data.errors, null, 2));
       navigate("/error");
     }
   };
@@ -59,7 +62,7 @@ const AddExpense = () => {
               type="number"
               name="amount"
               onChange={(e) =>
-                setnewexpense({ ...newexpense, amount: e.target.value })
+                setnewexpense({ ...newexpense, amount: Number(e.target.value) })
               }
             />
           </div>
@@ -79,7 +82,7 @@ const AddExpense = () => {
             <select
               value={newexpense.categoryId}
               onChange={(e) =>
-                setnewexpense({ ...newexpense, categoryId: e.target.value })
+                setnewexpense({ ...newexpense, categoryId: Number(e.target.value) })
               }
             >
               {categories.map((category) => (

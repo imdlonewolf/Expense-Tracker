@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public DateTime Last_Update { get; set; }
+        public DateTime Expense_Date { get; set; }
 
         public int UserId { get; set; }
         public string CategoryName { get; set; }

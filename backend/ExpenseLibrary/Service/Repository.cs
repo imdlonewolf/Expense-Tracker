@@ -43,6 +43,12 @@ namespace ExpenseLibrary.Service
             return await _context.Categories.ToListAsync();
         }
 
+        public async Task<string> GetCategoryById(int id)
+        {
+            Category c = await _context.Categories.FindAsync(id);
+            return c.CategoryName;
+        }
+
         public async Task<Expense> GetExpenseById(int id)
         {
             Expense e = await _context.Expenses.FindAsync(id);
@@ -81,7 +87,15 @@ namespace ExpenseLibrary.Service
             e.Description = expense.Description;
             e.Amount = expense.Amount;
             e.CategoryId = expense.CategoryId;
+            try { 
+            
             return await _context.SaveChangesAsync() > 0;
+            }
+            catch(Exception ee)
+            {
+                Console.WriteLine(ee);
+                return false;
+            }
         }
 
         

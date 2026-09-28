@@ -40,18 +40,33 @@ namespace Web_Api.Controllers
             }
             else
             {
-                return Ok(expense);
+                ExpenseDto ex = new ExpenseDto();
+                ex.UserId = expense.UserId;
+                ex.ExpenseId = expense.ExpenseId;
+                ex.CategoryId = expense.CategoryId;
+                ex.CategoryName = await _repo.GetCategoryById(expense.CategoryId);
+                ex.Description = expense.Description;
+                ex.Amount= expense.Amount;
+                ex.Last_Update = expense.Last_Update;
+                return Ok(ex);
             }
         }
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromBody]Expense e)
+        public async Task<IActionResult> AddExpense([FromBody]ExpenseDto expense)
         {
             int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            e.UserId = id;
-            if (await _repo.AddExpense(e))
+            expense.UserId = id;
+            Expense ex = new Expense();
+            ex.UserId = expense.UserId;
+            ex.CategoryId = expense.CategoryId;
+            ex.Description = expense.Description;
+            ex.Last_Update = DateTime.UtcNow;
+            ex.Amount = expense.Amount;
+            ex.Expense_Date = expense.Expense_Date;
+            if (await _repo.AddExpense(ex))
             {
-                return CreatedAtRoute("GetExpenseRoute", new { id = e.ExpenseId }, e);
+                return CreatedAtRoute("GetExpenseRoute", new { id = ex.ExpenseId }, expense);
             }
             else
             {
@@ -71,7 +86,7 @@ namespace Web_Api.Controllers
         }
         [Authorize]
         [HttpPut]
-        public async Task<IActionResult> UpdateExpense([FromBody]Expense e)
+        public async Task<IActionResult> UpdateExpense([FromBody]ExpenseDto e)
         {
             int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             e.UserId = id;
@@ -80,7 +95,11 @@ namespace Web_Api.Controllers
             {
                 return NotFound();
             }
-            if (await _repo.UpdateExpense(e))
+            e1.Amount = e.Amount;
+            e1.CategoryId = e.CategoryId;
+            e1.Description = e.Description;
+            e1.Last_Update = DateTime.UtcNow;
+            if (await _repo.UpdateExpense(e1))
             {
                 return Ok();
             }
