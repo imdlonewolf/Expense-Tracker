@@ -3,6 +3,7 @@ using ExpenseLibrary.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace Web_Api.Controllers
@@ -45,7 +46,9 @@ namespace Web_Api.Controllers
         [HttpPut]
         public IActionResult AccountUpdate([FromBody] User u)
         {
-            if (_repo.UpdateUser(u))
+            int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (id==u.UserId && _repo.UpdateUser(u))
             {
                 return Ok();
             }

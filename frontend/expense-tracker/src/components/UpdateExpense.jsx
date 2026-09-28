@@ -49,7 +49,7 @@ const UpdateExpense = () => {
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
       <section className="form-page">
-        {console.log(newexpense)}
+        {/* {console.log(newexpense)} */}
         <p className="eyebrow">Edit entry</p>
         <h1>Update expense</h1>
         <p className="form-intro">
