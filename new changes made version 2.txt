@@ -22,3 +22,10 @@ Amount range validation	❌ To do
 Logout	❌ To do
 Token persistence	❌ To do
 Pagination	❌ To do
+
+
+To dos before PR:
+1.CRUDs working fine locally
+2. both frontend and backend build working
+3. changed the baseurl in redux
+4. baseurl for react app is placed in production appsettings of .net api

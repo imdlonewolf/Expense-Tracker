@@ -8,8 +8,8 @@ const expenseSlicer = createSlice({
     categories: [],
     token: "",
     userId: 0,
-    baseUrl: "https://localhost:7273/",
-    // baseUrl: "https://expensepaglu-api.runasp.net/"
+    // baseUrl: "https://localhost:7273/",
+    baseUrl: "https://expensepaglu-api.runasp.net/",
     hasLoadedExpenses: false,
   },
   reducers: {
