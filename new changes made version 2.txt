@@ -13,4 +13,12 @@ userid retrieved from token and sent for each api request
 insert into Categories values('Utilities')
 insert into Categories values('Transport')
 insert into Categories values('LifeStyle')
-insert into Categories values('Health')
+insert into Categories values('Health') 
+git clone -b version-2 --single-branch https://github.com/imdlonewolf/Expense-Trackergood?
+
+Category null handling	❌ To do
+String length validation	❌ To do
+Amount range validation	❌ To do
+Logout	❌ To do
+Token persistence	❌ To do
+Pagination	❌ To do
