@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { detailsexpense } from "./redux/expenseSlicer";
+// import { useEffect, useState } from "react";
+import {  useParams } from "react-router-dom";
+// import { detailsexpense } from "./redux/expenseSlicer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const DetailsExpense = () => {
   const params = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const userId = useSelector((state) => state.expense.userId);
   const ex = useSelector((state) =>
     state.expense.items.find((item) => item.expenseId == params.id),

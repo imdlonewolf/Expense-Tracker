@@ -2,9 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/expenseSlicer";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const baseurl=useSelector((state) => state.expense.baseUrl);
@@ -27,7 +27,7 @@ const Login = () => {
         navigate("/");
       })
     .catch((error) => {
-      // console.log(error);
+      console.log(error);
       navigate("/Error");
     });
   };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateExpense } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ const UpdateExpense = () => {
     expenseId: Number(params.id),
     amount: expense?.amount || 0,
     description: expense?.description || "",
-    categoryId: expense?.categoryId ||   1,
+    categoryId: expense?.categoryId ?? "",
     categoryName: expense?.categoryName || "",
   });
   const dispatch = useDispatch();
@@ -29,14 +29,14 @@ const UpdateExpense = () => {
   const updatetolist = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+      await axios.put(
         `${baseurl}Expense/UpdateExpense`,
         newexpense,
         authConfig,
       );
       dispatch(updateExpense(newexpense));
       navigate("../");
-    } catch (error) {
+    } catch {
       navigate("/error");
       // console.log("Could not add", error);
       // console.log(JSON.stringify(error.response.data.errors, null, 2));
@@ -88,10 +88,16 @@ const UpdateExpense = () => {
             <label htmlFor="categoryId">Category</label>
             <select
               value={newexpense.categoryId}
-              onChange={(e) =>
-                setnewexpense({ ...newexpense, categoryId: e.target.value })
-              }
+              required
+              onChange={(e) => {
+                const categoryId = e.target.value;
+                setnewexpense({
+                  ...newexpense,
+                  categoryId: categoryId === "" ? "" : Number(categoryId),
+                });
+              }}
             >
+              <option value="">Select a category</option>
               {categories.map((category) => (
                 <option key={category.categoryId} value={category.categoryId}>
                   {category.categoryName}

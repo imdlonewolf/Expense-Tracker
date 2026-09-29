@@ -66,6 +66,7 @@ namespace Web_Api.Controllers
             ex.Expense_Date = expense.Expense_Date;
             if (await _repo.AddExpense(ex))
             {
+                expense.ExpenseId = ex.ExpenseId;
                 return CreatedAtRoute("GetExpenseRoute", new { id = ex.ExpenseId }, expense);
             }
             else

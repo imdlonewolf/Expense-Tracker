@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "./redux/expenseSlicer";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const AddExpense = () => {
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
-    categoryId: 0,
+    categoryId: "",
     categoryName: "",
   });
   const token = useSelector((state) => state.expense.token);
@@ -81,10 +81,12 @@ const AddExpense = () => {
             <label htmlFor="categoryId">Category</label>
             <select
               value={newexpense.categoryId}
+              required
               onChange={(e) =>
                 setnewexpense({ ...newexpense, categoryId: Number(e.target.value) })
               }
             >
+              <option value="">Select a category</option>
               {categories.map((category) => (
                 <option key={category.categoryId} value={category.categoryId}>
                   {category.categoryName}
