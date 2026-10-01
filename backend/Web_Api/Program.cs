@@ -1,7 +1,10 @@
 using ExpenseLibrary;
 using ExpenseLibrary.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,29 +18,34 @@ builder.Services.AddDbContext<ServiceContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-//builder.Services.Configure<JwtSettings>(
-//    builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<IRepository,Repository>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
-//builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowFrontend", policy =>
-//    {
-//        policy.WithOrigins("http://localhost:5173")
-//        .AllowAnyHeader()
-//        .AllowAnyMethod();
-//    });
-//});
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontendCloud", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("https://expense-tracker-one-chi-42.vercel.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(builder.Configuration.GetConnectionString("FrontendBaseUrl"))
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
@@ -49,13 +57,11 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
-//app.UseCors("AllowFrontend");
-app.UseCors("AllowFrontendCloud");
-//app.UseAuthentication();
-//app.UseAuthorization();
 app.UseHttpsRedirection();
-
-
+app.UseCors("AllowFrontend");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
 
 app.Run();

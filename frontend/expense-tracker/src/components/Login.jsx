@@ -2,8 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/expenseSlicer";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+// import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const baseurl=useSelector((state) => state.expense.baseUrl);
@@ -20,11 +21,14 @@ const Login = () => {
     .then((response) => {
         // setLoading(false);
         // setuserId(response.data);
-        dispatch(login(response.data));
+        var token=response.data;
+        dispatch(login(token));
+        // console.log("trying to login");
         navigate("/");
       })
     .catch((error) => {
       console.log(error);
+      navigate("/error");
     });
   };
   return (

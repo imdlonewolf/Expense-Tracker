@@ -7,29 +7,40 @@ import axios from "axios";
 const AddExpense = () => {
   const userId = useSelector((state) => state.expense.userId);
   const baseurl = useSelector((state) => state.expense.baseUrl);
+  const navigate = useNavigate();
+  const categories = useSelector((state) => state.expense.categories);
   const [newexpense, setnewexpense] = useState({
     amount: 0,
     description: "",
-    categoryId: 1,
-    userId: userId,
+    categoryId: "",
+    categoryName: "",
   });
+  const token = useSelector((state) => state.expense.token);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const addtolist = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         `${baseurl}Expense/AddExpense`,
         newexpense,
+        authConfig,
       );
       dispatch(addExpense(response.data));
       navigate("../");
     } catch (error) {
       console.log("Could not add", error);
       console.log(JSON.stringify(error.response.data.errors, null, 2));
+      navigate("/error");
     }
   };
+  if (userId === 0) {
+    return null;
+  }
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
@@ -51,7 +62,7 @@ const AddExpense = () => {
               type="number"
               name="amount"
               onChange={(e) =>
-                setnewexpense({ ...newexpense, amount: e.target.value })
+                setnewexpense({ ...newexpense, amount: Number(e.target.value) })
               }
             />
           </div>
@@ -66,13 +77,23 @@ const AddExpense = () => {
               }
             />
           </div>
-          {/* <input
-          type="number"
-          name="category"
-          onChange={(e) =>
-            setnewexpense({ ...newexpense, category: e.target.value })
-          }
-        /> */}
+          <div className="field">
+            <label htmlFor="categoryId">Category</label>
+            <select
+              value={newexpense.categoryId}
+              required
+              onChange={(e) =>
+                setnewexpense({ ...newexpense, categoryId: Number(e.target.value) })
+              }
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button className="form-submit" type="submit">
             Save expense
           </button>

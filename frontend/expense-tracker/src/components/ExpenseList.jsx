@@ -1,38 +1,56 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import AddExpense from "./AddExpense";
+import { useEffect } from "react";
+// import AddExpense from "./AddExpense";
 import { Link, useNavigate } from "react-router-dom";
-import { makeexpenselist, deleteExpense } from "./redux/expenseSlicer";
+import { makeexpenselist, deleteExpense,getcategories } from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = () => {
   const Expense = useSelector((state) => state.expense.items);
   const userId = useSelector((state) => state.expense.userId);
+  const token = useSelector((state) => state.expense.token);
   const baseurl = useSelector((state) => state.expense.baseUrl);
+  const hasLoadedExpenses = useSelector(
+    (state) => state.expense.hasLoadedExpenses,
+  );
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    if (userId == 0) {
-      console.log("trying to move it to login page");
-      navigate("/login");
-      return;
-    }
+    if (hasLoadedExpenses) return;
     axios
-      .get(`${baseurl}Expense/GetAllExpenses/${userId}`)
+      .get(`${baseurl}Expense/GetAllExpenses/`, authConfig)
       .then((response) => {
         dispatch(makeexpenselist(response.data));
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(token);
+        console.log(error.response);
+        navigate("/error");
       });
-  }, [userId, dispatch, navigate]);
+      axios.get(`${baseurl}Category/GetAllCategories`, authConfig)
+      .then((response) => {
+        dispatch(getcategories(response.data));
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        // console.log(token);
+        console.log(error.response);
+        navigate("/error");
+      });
+  }, [hasLoadedExpenses]);
   const deletetheexpense = (id) => {
     axios
-      .delete(`${baseurl}Expense/DeleteExpense/${id}`)
+      .delete(`${baseurl}Expense/DeleteExpense/${id}`, authConfig)
       .then(() => {
         dispatch(deleteExpense(id));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
+        navigate("/error");
       });
   };
   if (userId === 0) {
@@ -71,7 +89,7 @@ const ExpenseList = () => {
                     <td>{x.description}</td>
                     <td>
                       <span className="category-pill">
-                        Category {x.categoryId}
+                         {x.categoryName}
                       </span>
                     </td>
                     <td className="actions">

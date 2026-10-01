@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Web_Api.Model;
 
 namespace ExpenseLibrary.Service
 {
@@ -25,18 +26,28 @@ namespace ExpenseLibrary.Service
 
         
 
-        public async Task<bool> DeleteExpense(int id)
+        public async Task<bool> DeleteExpense(int id,int userId)
         {
             Expense e= await GetExpenseById(id);
-            if (e == null)
+
+             if ((e!=null) &&( e.UserId == userId))
             {
-                return  false;
+                _context.Remove(e);
+                return await _context.SaveChangesAsync() > 0;
             }
-            _context.Remove(e);
-            return await _context.SaveChangesAsync() > 0;
+            return false;
         }
 
+        public async Task<List<Category>> GetCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
 
+        public async Task<string> GetCategoryById(int id)
+        {
+            Category c = await _context.Categories.FindAsync(id);
+            return c.CategoryName;
+        }
 
         public async Task<Expense> GetExpenseById(int id)
         {
@@ -44,24 +55,47 @@ namespace ExpenseLibrary.Service
             return e;
         }
 
-        public async Task<List<Expense>> GetExpenses(int userId)
+
+        public async Task<List<ExpenseDto>> GetExpenses(int userId)
         {
-            return await _context.Expenses.Where(x=>x.UserId==userId).ToListAsync();
+            return await (
+                from e in _context.Expenses
+                join c in _context.Categories
+                    on e.CategoryId equals c.CategoryId
+                where e.UserId == userId
+                select new ExpenseDto
+                {
+                    ExpenseId = e.ExpenseId,
+                    Amount = e.Amount,
+                    Description = e.Description,
+                    CategoryId=e.CategoryId,
+                    CategoryName = c.CategoryName
+                }
+            ).ToListAsync();
         }
 
-       
+
 
         public async Task<bool> UpdateExpense(Expense expense)
         {
             Expense e = await GetExpenseById(expense.ExpenseId);
-            if (e == null)
+            if (e == null || e.UserId!=expense.UserId)
             {
                 return false;
             }
             e.Last_Update=DateTime.Now;
             e.Description = expense.Description;
             e.Amount = expense.Amount;
+            e.CategoryId = expense.CategoryId;
+            try { 
+            
             return await _context.SaveChangesAsync() > 0;
+            }
+            catch(Exception ee)
+            {
+                Console.WriteLine(ee);
+                return false;
+            }
         }
 
         
