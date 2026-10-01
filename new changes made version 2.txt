@@ -1,0 +1,31 @@
+1. Access of Any page not possible without login
+--if no userid in redux --- redirect to errorpage(asks to relogin)
+2. JWt enabled,token received after login,
+userid retrieved from token and sent for each api request
+3. CORS improved -- diff link for local and prod-- all saved in separate appsettings.json
+
+
+1.2.CategoryController is still an empty stub — implement it and stop hardcoding categoryId: 1
+2.Model validation + a global exception handler
+3.DTOs instead of binding controllers directly to Expense/User entities
+4.Pagination on GetAllExpenses
+
+insert into Categories values('Utilities')
+insert into Categories values('Transport')
+insert into Categories values('LifeStyle')
+insert into Categories values('Health') 
+git clone -b version-2 --single-branch https://github.com/imdlonewolf/Expense-Trackergood?
+
+Category null handling	❌ To do
+String length validation	❌ To do
+Amount range validation	❌ To do
+Logout	❌ To do
+Token persistence	❌ To do
+Pagination	❌ To do
+
+
+To dos before PR:
+1.CRUDs working fine locally
+2. both frontend and backend build working
+3. changed the baseurl in redux
+4. baseurl for react app is placed in production appsettings of .net api

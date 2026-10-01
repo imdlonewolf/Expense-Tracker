@@ -9,33 +9,47 @@ const UpdateExpense = () => {
   const baseurl = useSelector((state) => state.expense.baseUrl);
   const params = useParams();
   const userId = useSelector((state) => state.expense.userId);
+  const token = useSelector((state) => state.expense.token);
+  const expense=useSelector((state) => state.expense.items.find((item) => item.expenseId === Number(params.id)));
+  const categories = useSelector((state) => state.expense.categories);
+  const authConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const [newexpense, setnewexpense] = useState({
     expenseId: Number(params.id),
-    amount: 0,
-    description: "",
-    categoryId: 1,
-    userId: userId,
+    amount: expense?.amount || 0,
+    description: expense?.description || "",
+    categoryId: expense?.categoryId ?? "",
+    categoryName: expense?.categoryName || "",
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const updatetolist = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+      await axios.put(
         `${baseurl}Expense/UpdateExpense`,
         newexpense,
+        authConfig,
       );
       dispatch(updateExpense(newexpense));
       navigate("../");
-    } catch (error) {
-      console.log("Could not add", error);
-      console.log(JSON.stringify(error.response.data.errors, null, 2));
+    } catch {
+      navigate("/error");
+      // console.log("Could not add", error);
+      // console.log(JSON.stringify(error.response.data.errors, null, 2));
     }
   };
+  if (userId === 0) {
+    return null;
+  }
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
       <section className="form-page">
+        {/* {console.log(newexpense)} */}
         <p className="eyebrow">Edit entry</p>
         <h1>Update expense</h1>
         <p className="form-intro">
@@ -52,6 +66,7 @@ const UpdateExpense = () => {
               id="amount"
               type="number"
               name="amount"
+              value={newexpense.amount}
               onChange={(e) =>
                 setnewexpense({ ...newexpense, amount: e.target.value })
               }
@@ -63,18 +78,33 @@ const UpdateExpense = () => {
               id="description"
               type="text"
               name="description"
+              value={newexpense.description}
               onChange={(e) =>
                 setnewexpense({ ...newexpense, description: e.target.value })
               }
             />
           </div>
-          {/* <input
-          type="number"
-          name="category"
-          onChange={(e) =>
-            setnewexpense({ ...newexpense, category: e.target.value })
-          }
-        /> */}
+          <div className="field">
+            <label htmlFor="categoryId">Category</label>
+            <select
+              value={newexpense.categoryId}
+              required
+              onChange={(e) => {
+                const categoryId = e.target.value;
+                setnewexpense({
+                  ...newexpense,
+                  categoryId: categoryId === "" ? "" : Number(categoryId),
+                });
+              }}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button className="form-submit" type="submit">
             Save changes
           </button>

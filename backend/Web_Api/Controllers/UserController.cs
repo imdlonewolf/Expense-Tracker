@@ -1,7 +1,9 @@
 ﻿using ExpenseLibrary.Model;
 using ExpenseLibrary.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace Web_Api.Controllers
@@ -12,10 +14,10 @@ namespace Web_Api.Controllers
     {
         private readonly IAuthServices _repo;
         private readonly IJwtService _jwt;
-        public UserController(IAuthServices repo /*,IJwtService jwt*/)
+        public UserController(IAuthServices repo ,IJwtService jwt)
         {
             _repo = repo;
-            //_jwt = jwt;
+            _jwt = jwt;
         }
         [HttpPost]
         public IActionResult Login([FromBody]User user)
@@ -23,8 +25,8 @@ namespace Web_Api.Controllers
             User u = _repo.Login(user.Phone, user.Password);
             if(u!=null)
             {
-                //var token=_jwt.GenerateToken(u);
-                return Ok(u.UserId);
+                var token=_jwt.GenerateToken(u);
+                return Ok(token);
             }
             return BadRequest();
         }
@@ -40,10 +42,13 @@ namespace Web_Api.Controllers
                 return NotFound();
             }
         }
+        [Authorize]
         [HttpPut]
         public IActionResult AccountUpdate([FromBody] User u)
         {
-            if (_repo.UpdateUser(u))
+            int id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (id==u.UserId && _repo.UpdateUser(u))
             {
                 return Ok();
             }
