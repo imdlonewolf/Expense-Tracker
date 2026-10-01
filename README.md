@@ -1,27 +1,30 @@
 # Expense Tracker
 
-A full-stack expense tracking application built with an ASP.NET Core Web API backend and a React + Vite frontend. The app supports user sign-up, login, and CRUD operations for expenses. It is designed as a simple personal finance dashboard with a backend library, EF Core persistence, and a lightweight frontend for interacting with the API.
+A full-stack expense tracking application built with ASP.NET Core Web API and a React + Vite frontend. The app supports user sign-up, login, and full CRUD workflows for expenses, with JWT-based authentication and EF Core-backed SQL Server persistence.
+
+Live application:
+- Frontend: https://expense-tracker-one-chi-42.vercel.app
+- Backend API: https://expensepaglu-api.runasp.net/swagger/index.html
 
 ## Features
 
 ### Backend
 - User registration and login
+- JWT authentication and authorization
 - Password hashing and verification using ASP.NET Core Identity
 - Expense create, read, update, and delete flows
 - User-specific expense retrieval
-- EF Core migration-backed SQL Server storage
-- Repository/service layer separation
-- Swagger support for API exploration
+- EF Core migration-backed SQL Server / LocalDB storage
+- Repository and service layer separation
+- Swagger / Swashbuckle API documentation
 - NUnit-based backend tests
 
 ### Frontend
-- React single-page UI
-- Vite app setup for local development
-- Redux-based state management
-- Expense list and detail pages
-- Add, edit, and delete expense interactions
-- Login flow using user phone/password validation
-- Responsive styling for desktop and mobile screens
+- React single-page application powered by Vite
+- Redux Toolkit state management
+- Route-based navigation with React Router
+- Login, list, detail, add, edit, and delete expense flows
+- Responsive CSS styling for desktop and mobile screens
 
 ## Tech stack
 
@@ -40,9 +43,9 @@ A full-stack expense tracking application built with an ASP.NET Core Web API bac
 - Vite
 - Redux Toolkit
 - React Router
-- CSS modules / custom CSS
+- CSS modules and custom CSS
 
-## Repository structure
+## Project structure
 
 ```text
 .
@@ -74,7 +77,6 @@ A full-stack expense tracking application built with an ASP.NET Core Web API bac
 │   │   ├── appsettings.Development.json
 │   │   └── Properties/
 │   ├── Expense_Tracker_Test/
-│   │   └── ...
 │   ├── Expense_Tracker_API.sln
 │   └── ...
 ├── frontend/
@@ -89,23 +91,23 @@ A full-stack expense tracking application built with an ASP.NET Core Web API bac
 └── ...
 ```
 
-## How the app fits together
+## Architecture overview
 
-- `ExpenseLibrary` contains the data model and business logic: `User`, `Expense`, and `Category` entities, repository/service abstractions, and EF Core access.
-- `Web_Api` hosts the ASP.NET Core application, configures dependency injection, configures CORS, exposes controllers, and provides the API layer.
-- The frontend communicates with the backend through HTTP requests to controller endpoints and stores selected data in Redux.
-- The database is created through EF Core migrations and is currently configured for SQL Server.
+- `ExpenseLibrary` contains the model layer, repository/service abstractions, and EF Core logic.
+- `Web_Api` hosts the ASP.NET Core API, configures DI, JWT, CORS, and controller endpoints.
+- The frontend communicates with the backend over HTTP and stores auth and expense state in Redux.
+- The database schema is managed through EF Core migrations.
 
 ## Prerequisites
 
 Install the following before running the project locally:
 
 - .NET 8 SDK
-- Node.js and npm
+- Node.js 18+ and npm
 - SQL Server or LocalDB
 - Optional: `dotnet-ef` CLI
 
-Install the EF Core CLI if needed:
+Install EF Core tooling if needed:
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -121,14 +123,13 @@ dotnet restore Expense_Tracker_API.sln
 dotnet build Expense_Tracker_API.sln
 ```
 
-Set your connection string in `backend/Web_Api/appsettings.Development.json`.
-
-Example:
+Edit `backend/Web_Api/appsettings.Development.json` and set your database and JWT settings:
 
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=ExpenseTracker;Trusted_Connection=True;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=ExpenseTracker;Trusted_Connection=True;TrustServerCertificate=True;",
+    "FrontendBaseUrl": "http://localhost:5173"
   },
   "Jwt": {
     "Key": "replace-with-a-strong-development-only-secret",
@@ -139,9 +140,10 @@ Example:
 }
 ```
 
-Apply the existing migration:
+Apply migrations:
 
 ```bash
+cd backend
 dotnet ef database update \
   --project ExpenseLibrary/ExpenseLibrary.csproj \
   --startup-project Web_Api/Web_Api.csproj
@@ -150,13 +152,14 @@ dotnet ef database update \
 Run the API:
 
 ```bash
+cd backend
 dotnet run --project Web_Api/Web_Api.csproj
 ```
 
-The API serves Swagger at:
-
-- `https://localhost:7273/swagger`
-- `http://localhost:5258/swagger`
+The API is available at:
+- HTTPS: `https://localhost:7273`
+- HTTP: `http://localhost:5258`
+- Swagger: `https://localhost:7273/swagger`
 
 ## Frontend setup
 
@@ -168,7 +171,7 @@ npm install
 npm run dev
 ```
 
-The Vite app usually runs at:
+The app usually runs at:
 
 ```text
 http://localhost:5173
@@ -185,17 +188,17 @@ npm run preview
 
 ## API overview
 
-The current backend routes use controller/action naming rather than a conventional `/api/...` prefix.
+The API uses controller/action routes without a conventional `/api` prefix.
 
 ### User routes
 
 Controller: `UserController`
 
-| Method | Route | Purpose |
-|---|---|---|
-| POST | `/User/Login` | Validates `phone` and `password` |
-| POST | `/User/SignIn` | Creates a new user |
-| PUT | `/User/AccountUpdate` | Updates a user record |
+| Method | Route | Purpose | Auth |
+|---|---|---|---|
+| POST | `/User/Login` | Validates phone and password and returns a JWT token | No |
+| POST | `/User/SignIn` | Creates a new user | No |
+| PUT | `/User/AccountUpdate` | Updates the current user's record | Yes |
 
 Example login request:
 
@@ -208,30 +211,29 @@ curl -X POST http://localhost:5258/User/Login \
   }'
 ```
 
-Current behavior: `Login` returns the authenticated user ID (`UserId`) instead of a JWT token.
-
 ### Expense routes
 
 Controller: `ExpenseController`
 
-| Method | Route | Purpose |
-|---|---|---|
-| GET | `/Expense/GetAllExpenses/{userId}` | Return all expenses for a user |
-| GET | `/Expense/GetExpense/{id}` | Get a single expense |
-| POST | `/Expense/AddExpense` | Add a new expense |
-| PUT | `/Expense/UpdateExpense` | Update an expense |
-| DELETE | `/Expense/DeleteExpense/{id}` | Delete an expense |
+| Method | Route | Purpose | Auth |
+|---|---|---|---|
+| GET | `/Expense/GetAllExpenses` | Returns all expenses for the authenticated user | Yes |
+| GET | `/Expense/GetExpense/{id}` | Returns a single expense by ID | Yes |
+| POST | `/Expense/AddExpense` | Creates a new expense | Yes |
+| PUT | `/Expense/UpdateExpense` | Updates an expense | Yes |
+| DELETE | `/Expense/DeleteExpense/{id}` | Deletes an expense | Yes |
 
 Example create expense request:
 
 ```bash
 curl -X POST http://localhost:5258/Expense/AddExpense \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
   -d '{
     "amount": 12.50,
     "description": "Lunch",
-    "categoryId": 1,
-    "userId": 2
+    "categoryId": 2,
+    "expense_Date": "2026-10-01"
   }'
 ```
 
@@ -239,21 +241,17 @@ curl -X POST http://localhost:5258/Expense/AddExpense \
 
 Controller: `CategoryController`
 
-| Method | Route | Current behavior |
+| Method | Route | Purpose |
 |---|---|---|
-| GET | `/Category` | Returns `200 OK` without category data |
+| GET | `/Category` | Returns available categories |
 
-The category entity exists in the model and is linked to expenses via `CategoryId`, but category retrieval is still minimal in the current implementation.
-
-## Data model
+## Data models
 
 ### User
 - `UserId`
 - `Name`
 - `Phone`
-- `Password`
-
-Passwords are hashed before they are stored by `AuthServices.AddUser`.
+- `Password` (stored as a hash)
 
 ### Category
 - `CategoryId`
@@ -263,23 +261,16 @@ Passwords are hashed before they are stored by `AuthServices.AddUser`.
 - `ExpenseId`
 - `Amount`
 - `Description`
-- `Last_Update`
 - `Expense_Date`
+- `Last_Update`
 - `CategoryId`
 - `UserId`
 
-The EF migration creates the corresponding database tables and relationship keys for `Users`, `Categories`, and `Expenses`.
+## Authentication and authorization
 
-## Authentication status
+JWT authentication is enabled in the backend. The login flow validates the user and returns a JWT. The frontend stores that token and sends it in the `Authorization: Bearer <token>` header for protected endpoints.
 
-The repository includes JWT-related code such as `JwtService`, `JwtSettings`, and JWT service interfaces, but the application is not currently fully wired up for JWT authentication.
-
-The startup code in `backend/Web_Api/Program.cs` currently has JWT registration and middleware commented out, and `UserController` returns a `UserId` instead of a JWT.
-
-This means:
-- authentication is currently based on checking a user by phone/password
-- the app uses the resulting user ID in the frontend Redux state
-- bearer-token authorization is not yet enabled end-to-end
+Protected endpoints use `[Authorize]` and resolve the authenticated user ID from the token claims before performing operations.
 
 ## Database migrations
 
@@ -292,69 +283,63 @@ backend/ExpenseLibrary/Migrations/
 Create a migration:
 
 ```bash
+cd backend
 dotnet ef migrations add <MigrationName> \
-  --project backend/ExpenseLibrary/ExpenseLibrary.csproj \
-  --startup-project backend/Web_Api/Web_Api.csproj
+  --project ExpenseLibrary/ExpenseLibrary.csproj \
+  --startup-project Web_Api/Web_Api.csproj
 ```
 
 Apply migrations:
 
 ```bash
+cd backend
 dotnet ef database update \
-  --project backend/ExpenseLibrary/ExpenseLibrary.csproj \
-  --startup-project backend/Web_Api/Web_Api.csproj
+  --project ExpenseLibrary/ExpenseLibrary.csproj \
+  --startup-project Web_Api/Web_Api.csproj
 ```
 
-## Runtime and CORS notes
+## CORS configuration
 
-The backend CORS configuration currently allows:
+The backend CORS policy allows frontend requests from the configured origin in `Program.cs`.
 
-```text
-https://expense-tracker-one-chi-42.vercel.app
-```
+Default production origin:
+- `https://expense-tracker-one-chi-42.vercel.app`
 
-Local development may require adding:
-
-```text
-http://localhost:5173
-```
-
-This is configured in `backend/Web_Api/Program.cs`.
+Local development origin:
+- `http://localhost:5173`
 
 ## Testing
 
-Run the backend tests with:
+Run the backend unit tests:
 
 ```bash
-dotnet test backend/Expense_Tracker_Test/Expense_Tracker_Test.csproj
+cd backend
+dotnet test Expense_Tracker_Test/Expense_Tracker_Test.csproj
 ```
-
-The project includes NUnit-based tests and project references for the backend logic.
 
 ## Development notes
 
-- The backend is separated into a library project and API host project.
-- Business logic is stored in `ExpenseLibrary`.
+- The backend is structured as a library project plus an API host project.
+- Business logic lives in `ExpenseLibrary`.
 - HTTP endpoints are defined in `Web_Api/Controllers`.
-- The frontend uses Redux store state for the current user and expenses.
-- The default frontend API base URL is configured in `frontend/expense-tracker/src/components/redux/expenseSlicer.jsx`.
-- Do not commit generated build output, local database files, or `node_modules`.
+- The frontend uses Redux state to manage auth and expense data.
+- Do not commit generated build output, local DB files, or `node_modules`.
 
 ## Contributing
 
-1. Create a focused branch for your feature or fix.
-2. Update or add tests for backend behavior that you change.
+1. Create a feature branch before making changes.
+2. Add or update tests for any backend behavior you change.
 3. Update EF migrations when changing the data model.
 4. Verify both backend and frontend builds before opening a PR.
-5. Keep the documentation in sync with actual API behavior.
+5. Keep documentation aligned with actual project behavior.
 
 ## License
 
-No license file is currently included in the repository.
+No license file is currently included in this repository.
 
 ## Troubleshooting
 
-### EF Core commands fail because the tools are missing
+### EF Core commands fail because tooling is missing
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -362,15 +347,15 @@ dotnet tool install --global dotnet-ef
 
 ### Frontend cannot reach the API
 
-- Check the base URL in the Redux slice
-- Confirm backend CORS settings
-- Ensure the API is running locally and the port matches the frontend config
+- Confirm the backend is running
+- Check the configured API base URL in the frontend Redux setup
+- Confirm CORS allows the frontend origin
 
-### Build fails because of missing SQL Server instance
+### Build fails because SQL Server is not available
 
-- Use LocalDB for development
-- Or update the connection string to another supported database instance
+- Use LocalDB for local development
+- Or update the connection string to an available database instance
 
----
+## Summary
 
-This project is a useful example of a layered .NET + React application with CRUD functionality, EF Core persistence, and a basic Redux-powered frontend.
+Expense Tracker is a layered .NET + React application focused on secure, user-specific expense management with JWT authentication, database persistence, and a clean separation between API and frontend responsibilities.
