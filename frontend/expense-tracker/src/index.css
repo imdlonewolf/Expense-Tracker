@@ -66,6 +66,7 @@ input:focus-visible {
   outline-offset: 3px;
 }
 .page-shell {
+  position: relative;
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
   padding: 48px 0 72px;
@@ -89,6 +90,30 @@ input:focus-visible {
   background: var(--warm);
   content: "";
   transform: rotate(-12deg);
+}
+
+.logout {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 1;
+}
+
+.logout button {
+  padding: 9px 16px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  color: var(--danger);
+  background: var(--surface);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.logout button:hover {
+  border-color: var(--danger);
+  color: var(--surface);
+  background: var(--danger);
 }
 
 .page-header {
@@ -357,6 +382,15 @@ form button:hover {
   .page-shell {
     width: min(100% - 28px, 560px);
     padding-top: 28px;
+  }
+
+  .logout {
+    top: 28px;
+    right: 0;
+  }
+
+  .logout button {
+    padding: 8px 12px;
   }
 
   .page-header {

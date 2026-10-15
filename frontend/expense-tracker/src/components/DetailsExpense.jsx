@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
-import {  useParams } from "react-router-dom";
-// import { detailsexpense } from "./redux/expenseSlicer";
+import { useParams } from "react-router-dom";
+import { logout } from "./redux/expenseSlicer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -17,6 +17,9 @@ const DetailsExpense = () => {
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
+      <div className="logout">
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
       <section className="detail-page">
         <p className="eyebrow">Expense details</p>
         <h1>Transaction</h1>

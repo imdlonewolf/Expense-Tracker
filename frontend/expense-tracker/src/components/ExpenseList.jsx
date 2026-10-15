@@ -2,7 +2,12 @@ import axios from "axios";
 import { useEffect } from "react";
 // import AddExpense from "./AddExpense";
 import { Link, useNavigate } from "react-router-dom";
-import { makeexpenselist, deleteExpense,getcategories } from "./redux/expenseSlicer";
+import {
+  makeexpenselist,
+  deleteExpense,
+  getcategories,
+  logout,
+} from "./redux/expenseSlicer";
 import { useDispatch, useSelector } from "react-redux";
 const ExpenseList = () => {
   const Expense = useSelector((state) => state.expense.items);
@@ -31,7 +36,8 @@ const ExpenseList = () => {
         console.log(error.response);
         navigate("/error");
       });
-      axios.get(`${baseurl}Category/GetAllCategories`, authConfig)
+    axios
+      .get(`${baseurl}Category/GetAllCategories`, authConfig)
       .then((response) => {
         dispatch(getcategories(response.data));
         // console.log(response.data);
@@ -59,6 +65,9 @@ const ExpenseList = () => {
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
+      <div className="logout">
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
       <header className="page-header">
         <div>
           <p className="eyebrow">Personal finance</p>
@@ -88,9 +97,7 @@ const ExpenseList = () => {
                     <td className="amount-cell">{x.amount}</td>
                     <td>{x.description}</td>
                     <td>
-                      <span className="category-pill">
-                         {x.categoryName}
-                      </span>
+                      <span className="category-pill">{x.categoryName}</span>
                     </td>
                     <td className="actions">
                       <Link

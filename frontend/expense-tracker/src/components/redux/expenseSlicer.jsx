@@ -8,8 +8,8 @@ const expenseSlicer = createSlice({
     categories: [],
     token: "",
     userId: 0,
-    // baseUrl: "https://localhost:7273/",
-    baseUrl: "https://expensepaglu-api.runasp.net/",
+    baseUrl: "https://localhost:7273/",
+    // baseUrl: "https://expensepaglu-api.runasp.net/",
     hasLoadedExpenses: false,
   },
   reducers: {
@@ -19,6 +19,13 @@ const expenseSlicer = createSlice({
         "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
       ];
     },
+    logout: (state) => {
+      state.token = "";
+      state.userId = 0;
+      state.items = [];
+      state.categories = [];
+      state.hasLoadedExpenses = false;
+    },
     makeexpenselist: (state, action) => {
       state.items = action.payload;
       state.hasLoadedExpenses = true;
@@ -27,15 +34,17 @@ const expenseSlicer = createSlice({
       state.categories = action.payload;
     },
     addExpense: (state, action) => {
-      var exp=action.payload;
-      var cat=state.categories.find((x)=>x.categoryId==exp.categoryId);
-      exp.categoryName=cat.categoryName;
+      var exp = action.payload;
+      var cat = state.categories.find((x) => x.categoryId == exp.categoryId);
+      exp.categoryName = cat.categoryName;
       state.items.push(action.payload);
     },
     updateExpense: (state, action) => {
       var id = action.payload.expenseId;
       var exp = state.items.find((x) => x.expenseId == id);
-      exp.categoryName=state.categories.find((x)=>x.categoryId==action.payload.categoryId).categoryName;
+      exp.categoryName = state.categories.find(
+        (x) => x.categoryId == action.payload.categoryId,
+      ).categoryName;
       exp.amount = action.payload.amount;
       exp.description = action.payload.description;
       // console.log(exp.categoryName);
@@ -54,5 +63,6 @@ export const {
   getcategories,
   detailsexpense,
   login,
+  logout,
 } = expenseSlicer.actions;
 export default expenseSlicer.reducer;

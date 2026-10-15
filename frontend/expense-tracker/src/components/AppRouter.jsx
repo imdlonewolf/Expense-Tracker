@@ -3,6 +3,7 @@ import DetailsExpense from "./DetailsExpense";
 import UpdateExpense from "./UpdateExpense";
 import AddExpense from "./AddExpense";
 import Login from "./Login";
+import SignUp from "./SignUp";
 import ExpenseList from "./ExpenseList";
 // import PleaseLogin from "./PleaseLogin";
 import ErrorPage from "./ErrorPage";
@@ -11,6 +12,7 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/error" element={<ErrorPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<ExpenseList />} />

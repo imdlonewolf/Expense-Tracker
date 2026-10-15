@@ -31,7 +31,7 @@ namespace Web_Api.Controllers
             return BadRequest();
         }
         [HttpPost]
-        public IActionResult SignIn([FromBody] User u)
+        public IActionResult SignUp([FromBody] User u)
         {
             if (_repo.AddUser(u))
             {

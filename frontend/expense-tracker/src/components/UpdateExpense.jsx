@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateExpense } from "./redux/expenseSlicer";
+import { updateExpense,logout } from "./redux/expenseSlicer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -10,7 +10,9 @@ const UpdateExpense = () => {
   const params = useParams();
   const userId = useSelector((state) => state.expense.userId);
   const token = useSelector((state) => state.expense.token);
-  const expense=useSelector((state) => state.expense.items.find((item) => item.expenseId === Number(params.id)));
+  const expense = useSelector((state) =>
+    state.expense.items.find((item) => item.expenseId === Number(params.id)),
+  );
   const categories = useSelector((state) => state.expense.categories);
   const authConfig = {
     headers: {
@@ -48,6 +50,9 @@ const UpdateExpense = () => {
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
+      <div className="logout">
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
       <section className="form-page">
         {/* {console.log(newexpense)} */}
         <p className="eyebrow">Edit entry</p>

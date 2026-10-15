@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExpense } from "./redux/expenseSlicer";
+import { addExpense,logout } from "./redux/expenseSlicer";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -44,6 +44,9 @@ const AddExpense = () => {
   return (
     <main className="page-shell">
       <div className="brand-mark">ExpensePaglu</div>
+      <div className="logout">
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
       <section className="form-page">
         <p className="eyebrow">New entry</p>
         <h1>Add expense</h1>
@@ -83,7 +86,10 @@ const AddExpense = () => {
               value={newexpense.categoryId}
               required
               onChange={(e) =>
-                setnewexpense({ ...newexpense, categoryId: Number(e.target.value) })
+                setnewexpense({
+                  ...newexpense,
+                  categoryId: Number(e.target.value),
+                })
               }
             >
               <option value="">Select a category</option>
